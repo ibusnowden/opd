@@ -1,0 +1,42 @@
+# Diagnostic OPD smoke on reasoning_gym/spell_backward — the configs' original placeholder task,
+# small enough that a 1B student should make obvious progress.  3 arms (one per teacher) × 1 seed,
+# 50 steps each.  Decouples "is the OPD path broken?" (it isn't, if rev_kl falls & reward rises here)
+# from "is gsm_symbolic too hard for 1B with a 7B teacher?" (the Exp-1 failure mode we're diagnosing).
+#
+# Hyperparams identical to opd_diff_teachers.yaml except: task=spell_backward, num_steps=50,
+# eval_every=25, max_new_tokens=256 (completions are short), data.size=300.
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: spell_backward
+  size: 300
+loss: reinforce
+max_new_tokens: 256
+
+alpha: 1.0
+lam: 1.0
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-SFT          # overridden per arm by run_opd_spell_backward_smoke.sh
+  device_id: 0
+per_token_kl_clip: null
+outcome_loss: grpo
+
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 50
+seed: 42
+
+eval_every: 25
+eval_n_prompts: 32
+eval_n_samples: 8                                 # k_values = [1, 2, 4, 8]
+eval_temps: [0.6]
+save_ckpt: false                                  # smoke — don't bother
+
+wandb_project: distill-harness
+wandb_group: opd-spell-backward-smoke
+wandb_tags: [opd-smoke, spell_backward, diagnostic]

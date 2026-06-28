@@ -1,0 +1,81 @@
+{
+  "student": "harness/checkpoints/opsd-clip1.0-lam0.10-s42-75338",
+  "teacher": "allenai/OLMo-2-1124-7B-SFT",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 4,
+  "T": 0.6,
+  "n_tokens_total": 41433,
+  "completion_accuracy": 0.640625,
+  "top_q": 0.1,
+  "n_tokens": 41433,
+  "kl_mean": -0.5097550972121568,
+  "kl_p50": -0.06585274563985877,
+  "kl_p90": 0.04994773864746094,
+  "kl_p99": 1.2372360229492188,
+  "kl_max": 9.948601379990578,
+  "kl_heavy_tail_frac": 0.009967899983105254,
+  "abs_top_q": 0.1,
+  "heavy_tail": 5.0,
+  "kl_mean_on_correct": -0.1324859438510584,
+  "kl_mean_on_incorrect": -0.7521891166710072,
+  "topq_correct_frac": 0.026792179580014484,
+  "overall_correct_frac": 0.39120990514807036,
+  "topq_correct_lift": 0.06848543257071628,
+  "topq_format_frac": 0.03813661597875935,
+  "overall_format_frac": 0.1092607341973789,
+  "topq_format_lift": 0.3490422818307789,
+  "taxonomy": {
+    "clip_threshold": 1.0,
+    "n_total": 41433,
+    "total_abs_kl": 26042.80066365197,
+    "total_clip_removed_abs_kl": 10727.911695531833,
+    "buckets": {
+      "format": {
+        "n_tokens": 4527,
+        "frac_of_tokens": 0.1092607341973789,
+        "mass_frac": 0.051219885750397626,
+        "mean_kl": -0.27531256937925425,
+        "mean_abs_kl": 0.2946563451761947,
+        "mean_entropy": 0.670396275080508,
+        "corr_frac": 0.6255798542080848,
+        "frac_of_clip_removed": 0.036731765352441346,
+        "mass_frac_after_clip": 0.061368655133385054
+      },
+      "uncertain": {
+        "n_tokens": 16466,
+        "frac_of_tokens": 0.3974126903675814,
+        "mass_frac": 0.8143015638551672,
+        "mean_kl": -1.0090365155500498,
+        "mean_abs_kl": 1.287908010906121,
+        "mean_entropy": 10.773190880978685,
+        "corr_frac": 0.02520344953236973,
+        "frac_of_clip_removed": 0.89610922115982,
+        "mass_frac_after_clip": 0.7569961974624019
+      },
+      "wrong_confident": {
+        "n_tokens": 129,
+        "frac_of_tokens": 0.0031134602852798494,
+        "mass_frac": 0.013218316836019605,
+        "mean_kl": -2.6685425617787084,
+        "mean_abs_kl": 2.6685425617787084,
+        "mean_entropy": 0.06683734774532234,
+        "corr_frac": 0.21705426356589147,
+        "frac_of_clip_removed": 0.020063736221757077,
+        "mass_frac_after_clip": 0.008423175660530722
+      },
+      "content": {
+        "n_tokens": 20311,
+        "frac_of_tokens": 0.49021311514975985,
+        "mass_frac": 0.1212602335584278,
+        "mean_kl": -0.14353334083476013,
+        "mean_abs_kl": 0.15548008916301592,
+        "mean_entropy": 0.1028616212809528,
+        "corr_frac": 0.6367977942986559,
+        "frac_of_clip_removed": 0.04709527726598166,
+        "mass_frac_after_clip": 0.1732119717437031
+      }
+    }
+  },
+  "wall_seconds": 269.89547419548035
+}

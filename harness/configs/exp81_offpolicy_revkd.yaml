@@ -1,0 +1,56 @@
+# exp81_offpolicy_revkd.yaml — §8.1 follow-up (L3): "is on-policy-ness alone load-bearing?"
+#
+# L2 (§8.1) showed off-policy SFT >> on-policy pure-OPD, and killed the correctness-filter confound,
+# but still varied THREE things at once between the arms: on-policy-ness, KL direction (fwd-CE vs
+# reverse-KL), and trace coherence. L3 isolates on-policy-ness ALONE: hold the teacher and the
+# per-token reverse-KL objective FIXED, and change ONLY the states the loss lands on —
+#   on-policy OPD   : reverse-KL on STUDENT-sampled trajectories  (= opd-instruct7b-s42/s43, p@1 ~0.005)
+#   off-policy revKD: reverse-KL on TEACHER-sampled trajectories  (THIS config; teacher's own rollouts)
+# Same teacher (7B-Instruct), same objective (reverse_kl_distill_advantage, clip=null), same
+# init/LR/#steps/#seqs-per-step. The only difference is `offpolicy_teacher_states` (the buffer is
+# filled from the teacher's _ALL.jsonl rollouts instead of student.generate()).
+#
+# Read: if off-policy revKD ALSO beats on-policy OPD (>> 0.005), on-policy-ness is decisively NOT
+# load-bearing (post's headline fully reversed). If it collapses to ~0.005, then reverse-KL-on-
+# student-states was the culprit and on-policy-ness was carrying the weight after all.
+#
+# Matches opd_diff_teachers.yaml (the config that produced opd-instruct7b) on every shared knob.
+model_name: allenai/OLMo-2-0425-1B-SFT      # student: SFT-only 1B (same init as the on-policy OPD arm)
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000                                # only used to size the (ignored) prompt dataloader's step count
+loss: reinforce                             # base-schema field; the lam=1 path uses the reverse-KL term
+max_new_tokens: 1024                        # completion-length guard when tokenizing teacher rollouts
+
+# --- meta-algorithm corner: (alpha=0, lam=1, teacher=same_family) = off-policy reverse-KD ---
+alpha: 0.0                                  # OFF-policy: the states come from the teacher, not the student
+lam: 1.0                                    # pure distillation (no outcome branch)
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-Instruct   # SAME teacher as on-policy opd-instruct7b
+  device_id: 0
+per_token_kl_clip: null                     # null to MATCH the on-policy OPD arm (unclipped) — no confound
+outcome_loss: grpo                          # unused at lam=1
+
+# --- the L3 switch: fill the buffer from the teacher's OWN rollouts (teacher-sampled states) ---
+offpolicy_teacher_states: rft_data/gsm_symbolic_from_OLMo-2-1124-7B-Instruct_seed4242_ALL.jsonl
+
+# --- training (HELD CONSTANT vs the on-policy OPD arm) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8                       # chunk size for the student/teacher forward (grouping irrelevant at lam=1)
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42                                    # launcher varies {42, 43}
+
+# --- eval done post-hoc in the launcher at the §8.1 matched protocol (T=0.6, 64x16, eval-seed 1e6) ---
+eval_every: 0
+save_ckpt: true
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_group: exp81-offpolicy-revkd
+wandb_tags: [exp81, offpolicy-revkd, gsm_symbolic, "olmo2-1b-sft<-7b-instruct"]

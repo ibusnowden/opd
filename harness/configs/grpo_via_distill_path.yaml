@@ -1,0 +1,59 @@
+# grpo_via_distill_path.yaml — RESULTS.md §7.3 bullet 3: v2-path GRPO control.
+#
+# Tests whether `_run_distill_loop` reproduces the 0.577 pass@1 GRPO baseline (currently produced
+# by `_run_rl_loop`).  Rules out a silent code-path difference (replay-buffer ordering, micro-batch
+# resharuffle, off-policy correction edge case, …) as the reason the v2.1 specialized-teacher
+# interior arms top out at 0.340 instead of matching GRPO.
+#
+# Strategy: lam=0.001 (NOT 0.0 — the trainer dispatches lam==0 to `_run_rl_loop`).  At this λ the
+# teacher contributes 0.1% of the loss, well below the ±0.05 seed-to-seed noise on GRPO, AND the
+# teacher is loaded + queried the same way as the v2.1 interior arms — so the compute path
+# (teacher forward each micro-batch, kl_signal logging, blended loss formula) is bit-identical to
+# the interior arms.  If pass@1 lands within ±0.05 of 0.577, the distill path is consistent with
+# the rl path; if it lands materially lower, the v2 interior numbers may have been undercounting
+# GRPO contribution and the "0.340 ≈ 0.59·GRPO" reading needs revision.
+#
+# Everything else: held FIXED vs exp4_lambda_interior_gsm_teacher.yaml seed-42 (i.e. SLURM 71202).
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+# lam=0.001 NOT 0.0 — the dispatch in train_policy_gradient routes 0.0 to _run_rl_loop (the path
+# we are deliberately bypassing). 0.001 is the smallest λ that exercises _run_distill_loop while
+# leaving the optimization ~99.9% GRPO.
+alpha: 1.0
+lam: 0.001
+teacher:
+  kind: same_family
+  model_name: /project/inniang/research/harness/checkpoints/teacher_7B-SFT-gsm
+  device_id: 0
+per_token_kl_clip: null
+outcome_loss: grpo
+
+# --- training (HELD CONSTANT vs Exp 4 v2.1 seed-42) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval (HELD CONSTANT vs Exp 4 v2.1 seed-42) ---
+eval_every: 250
+eval_n_prompts: 64
+eval_n_samples: 16
+eval_temps: [0.6]
+save_ckpt: true
+
+# --- logging ---
+wandb_project: distill-harness
+wandb_run_name: grpo-via-distill-lam0.001-seed42
+wandb_group: exp4-grpo-via-distill-control
+wandb_tags: [exp4, grpo-control, distill-path, gsm_symbolic]

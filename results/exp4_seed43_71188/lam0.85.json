@@ -1,0 +1,31 @@
+{
+  "lam": 0.85,
+  "seed": 43,
+  "train_minutes": 386.2,
+  "evals": {
+    "step_250_T0.6": {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.007,
+      "pass@1": 0.007,
+      "pass@2": 0.014,
+      "pass@4": 0.027,
+      "pass@8": 0.051,
+      "pass@16": 0.094,
+      "token_entropy": 1.284
+    },
+    "step_500_T0.6": {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.013,
+      "pass@1": 0.013,
+      "pass@2": 0.025,
+      "pass@4": 0.047,
+      "pass@8": 0.085,
+      "pass@16": 0.141,
+      "token_entropy": 1.58
+    }
+  },
+  "log": "/project/inniang/research/harness/logs/exp4_lam0.85_seed43_71188.log",
+  "ckpt": "/project/inniang/research/harness/checkpoints/exp4_lam0.85_seed43/"
+}

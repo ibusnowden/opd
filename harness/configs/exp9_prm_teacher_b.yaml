@@ -1,0 +1,75 @@
+# exp9_prm_teacher_b.yaml — PRM-as-teacher variant (b): a SEPARATELY-TRAINED step-level PRM
+# scoring process correctness (prms-as-teachers.md variant (b); roadmap §8.4 item 1).
+#
+# Variant (c) (Exp 6) used a SELF-REFERENTIAL answer-info-gain g_t from the same 7B teacher and
+# FAILED — a mass-preserving reweight CONCENTRATES the per-token KL tail the clip exists to BOUND
+# (§7.11: no-clip+reweight 0.006, clip+reweight 0.157 vs 0.204 baseline). The roadmap's prediction
+# for variant (b): a separately-trained step-level PRM scoring PROCESS CORRECTNESS (not answer-
+# dependence) is qualitatively different — its mass may be bounded enough to avoid the tail-
+# sharpening. The falsification test:
+#   - no-clip + trained-PRM  -> collapses like variant (c)?  (prediction: yes)
+#   - trained-PRM + clip     -> matches or beats the clipped logit-teacher baseline (A=0.204)?
+#
+# Held FIXED vs Exp 6 (so the comparison is apples-to-apples): student -1B-SFT, gsm_symbolic,
+# alpha=1, lam=1, 500 steps, prompts_per_step=8 × num_rollouts=8 × max_new=1024, eval @ 250/500,
+# save_ckpt. The teacher (7B-SFT+answer) is the SAME as Exp 5/6; only the importance signal changes
+# (answer_info_gain -> trained PRM step_scores). The PRM is trained by harness/train_prm.py on
+# 7B-SFT teacher rollouts on gsm_symbolic (correct trajectories only, per-step labels from
+# metadata.variables), then loaded as prm_source="trained".
+#
+# 4 arms (run_exp9_prm_teacher_b.sh), each at lam=1, seed 42:
+#   A opsd-baseline       clip=1.0  prm=off   (Exp-6 arm A — should reproduce 0.204)
+#   B opsd-noclip         clip=null prm=off   (Exp-6 arm B — should reproduce 0.007)
+#   C prm-trained-noclip  clip=null prm=on    (THE CONJECTURE: trained-PRM replaces the clip)
+#   D prm-trained-clip    clip=1.0  prm=on    (do trained-PRM + clip stack?)
+#
+# The launcher overrides per_token_kl_clip, prm_reweight, prm_source, prm_model_path per arm.
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0                                      # pure OPSD; PRM-reweighting is wired at lam==1
+teacher:
+  kind: self                                  # PrivilegedInfoTeacher (harness/teachers.py)
+  model_name: allenai/OLMo-2-1124-7B-SFT      # same teacher as Exp 5/6 (matched comparison)
+  condition_on: answer                        # OPSD-style; the teacher provides reverse-KL logits
+  frozen_at_init: true
+  device_id: 0
+per_token_kl_clip: 1.0                         # OVERRIDDEN PER ARM (null for B/C) by the launcher
+outcome_loss: grpo                             # unused at lam=1
+
+# --- PRM-reweighted OPSD (variant b) ---
+prm_reweight: false                            # OVERRIDDEN PER ARM (true for C/D) by the launcher
+prm_source: answer_info_gain                   # OVERRIDDEN to "trained" for C/D by the launcher
+prm_model_path: null                           # OVERRIDDEN to the trained-PRM ckpt path for C/D
+prm_weight_fn: softmax                         # mass-preserving softmax-over-importance (matched to Exp 6)
+prm_temperature: 1.0                           # softmax sharpness (matched to Exp 6)
+prm_weight_ceiling: null                       # uncapped (matched to Exp 6)
+
+# --- training (HELD CONSTANT vs Exp 6) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval (HELD CONSTANT vs Exp 6) ---
+eval_every: 250
+eval_n_prompts: 64
+eval_n_samples: 16
+eval_temps: [0.6]
+save_ckpt: true
+
+# --- logging ---
+wandb_project: distill-harness
+wandb_group: exp9-prm-teacher-b
+wandb_tags: [exp9, prms-as-teachers, opsd, prm-trained, gsm_symbolic, "olmo2-1b-sft<-7b-sft+answer"]

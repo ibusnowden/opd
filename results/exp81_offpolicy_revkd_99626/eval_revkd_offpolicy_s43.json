@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/offpolicy-revkd-instruct7b-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.2861328125,
+      "eval/pass@2": 0.39895833333333336,
+      "eval/pass@4": 0.5036315247252747,
+      "eval/pass@8": 0.5857335372960373,
+      "eval/pass@16": 0.625,
+      "eval/accuracy_mean": 0.2861328125,
+      "eval/solved_any": 0.625,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 252.21550607681274,
+      "eval/token_entropy": 0.513742612907663,
+      "eval/distinct_1": 0.06470502122676036,
+      "eval/distinct_2": 0.23321782178217823,
+      "eval/distinct_3": 0.3537449138493997,
+      "eval/distinct_4": 0.43576017130620986
+    }
+  }
+}

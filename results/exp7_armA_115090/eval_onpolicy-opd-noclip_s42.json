@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/onpolicy-opd-noclip-s42-armA1g-115090",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.0087890625,
+      "eval/pass@2": 0.017317708333333334,
+      "eval/pass@4": 0.033593750000000006,
+      "eval/pass@8": 0.06302083333333333,
+      "eval/pass@16": 0.109375,
+      "eval/accuracy_mean": 0.0087890625,
+      "eval/solved_any": 0.109375,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 1114.3647847175598,
+      "eval/token_entropy": 1.2025718307122588,
+      "eval/distinct_1": 0.3226788432267884,
+      "eval/distinct_2": 0.6280864197530864,
+      "eval/distinct_3": 0.7605633802816901,
+      "eval/distinct_4": 0.8317460317460318
+    }
+  }
+}

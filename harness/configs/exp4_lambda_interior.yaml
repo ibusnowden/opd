@@ -1,0 +1,60 @@
+# exp4_lambda_interior.yaml — RESULTS.md §4.2 Next Experiment / proposal [[meta-algorithm-alpha-lambda]] (#6),
+# [[expert-rl-plus-opd]] (#11).  The Exp-1 finding was that OPD (λ=1) loses ~40× pass@1 to GRPO (λ=0) on
+# gsm_symbolic, AND that the teacher (D3: pass@1≈0.46) DID have the math.  This sweep probes the (α=1, λ)
+# interior between those two corners — does a SMALL teacher term ON TOP of GRPO help (the teacher
+# per-token signal is content-correlated per D2: top_correct_lift 2.10), or does it poison the verifier?
+#
+# Setup HELD CONSTANT vs Exp 1's `opd_diff_teachers.yaml`: student -1B-SFT, teacher -7B-SFT
+# (best-behaving teacher in the diagnostics — lowest residual rev_kl), gsm_symbolic, 500 steps, seed 42,
+# 8 prompts × 8 rollouts × 1024 max_new, save_ckpt for post-hoc pass@k.  The launcher
+# (run_exp4_lambda.sh) varies ONLY `lam` per arm.
+#
+# Loss math (post-2026-05-13 refactor of `_run_distill_loop`):
+#   0 < λ < 1: loss = λ · L_teacher_REINFORCE  +  (1-λ) · L_outcome_clipped     (e.g. GRPO clipped policy-ratio)
+#   λ = 1   : loss = L_teacher_REINFORCE                                        (pure OPD, unchanged)
+# I.e. the (1-λ) branch is the *proper* clipped GRPO objective from `policy_gradients.loss.GRPOLoss`, not
+# REINFORCE on the blended advantage.  The teacher branch is still REINFORCE on the detached per-token
+# reverse-KL advantage `A^teacher_t = log π_T - log π_θ` (the standard Lu & Thinking Machines 2025 OPD
+# form).  `loss/teacher_term` and `loss/outcome_term` are logged separately so the lam-interior split is
+# visible per-step.  See `harness/unified_trainer.py::_run_distill_loop` and `distill_losses.py`.
+#
+# Memory: 1B full-FT + Adam (~12-16 GB) + 7B bf16 frozen teacher (~14 GB) ≈ 30 GB on one 80 GB H100.
+model_name: allenai/OLMo-2-0425-1B-SFT       # student: same as Exp 1 (room to improve, has chat template)
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce                              # base-schema; lam>0 uses UnifiedTokenLoss
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0                                     # OVERRIDDEN PER ARM by run_exp4_lambda.sh (8 λ values)
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-SFT     # best-behaving teacher in D1 smoke (lowest residual rev_kl)
+  device_id: 0
+per_token_kl_clip: null
+outcome_loss: grpo                           # advantages = group-normalized (REINFORCE on the (1-λ) branch)
+
+# --- training (HELD CONSTANT ACROSS ALL ARMS — same as Exp 1) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- held-out pass@k eval (same as Exp 1) ---
+eval_every: 250                              # evals @ steps 250 and 500 (plus always last step)
+eval_n_prompts: 64
+eval_n_samples: 16                           # k_values = [1, 2, 4, 8, 16]
+eval_temps: [0.6]
+save_ckpt: true                              # per-arm save_pretrained -> harness/checkpoints/<run_name>/
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_group: exp4-lambda-interior
+wandb_tags: [exp4, lambda-interior, gsm_symbolic, "olmo2-1b-sft<-7b-sft"]

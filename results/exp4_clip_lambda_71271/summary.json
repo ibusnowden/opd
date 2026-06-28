@@ -1,0 +1,226 @@
+{
+  "job": 71271,
+  "seed": 42,
+  "teacher": "harness/checkpoints/teacher_7B-SFT-gsm",
+  "per_token_kl_clip": 1.0,
+  "source": "trainer logs / W&B summaries; eval JSON export was not emitted by the job",
+  "arms": {
+    "lam0.05": {
+      "lam": 0.05,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.544,
+          "pass@1": 0.544,
+          "pass@2": 0.589,
+          "pass@4": 0.626,
+          "pass@8": 0.652,
+          "pass@16": 0.672,
+          "token_entropy": 1.189
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.638,
+          "pass@1": 0.638,
+          "pass@2": 0.669,
+          "pass@4": 0.699,
+          "pass@8": 0.721,
+          "pass@16": 0.734,
+          "token_entropy": 0.338
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_0_clip1.0-lam0.05-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.05-s42-71271/"
+    },
+    "lam0.10": {
+      "lam": 0.1,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.604,
+          "pass@1": 0.604,
+          "pass@2": 0.651,
+          "pass@4": 0.681,
+          "pass@8": 0.698,
+          "pass@16": 0.703,
+          "token_entropy": 0.645
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.709,
+          "pass@1": 0.709,
+          "pass@2": 0.759,
+          "pass@4": 0.789,
+          "pass@8": 0.807,
+          "pass@16": 0.812,
+          "token_entropy": 0.976
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_1_clip1.0-lam0.10-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.10-s42-71271/"
+    },
+    "lam0.20": {
+      "lam": 0.2,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.528,
+          "pass@1": 0.528,
+          "pass@2": 0.606,
+          "pass@4": 0.659,
+          "pass@8": 0.699,
+          "pass@16": 0.719,
+          "token_entropy": 1.109
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.601,
+          "pass@1": 0.601,
+          "pass@2": 0.672,
+          "pass@4": 0.706,
+          "pass@8": 0.723,
+          "pass@16": 0.734,
+          "token_entropy": 2.206
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_2_clip1.0-lam0.20-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.20-s42-71271/"
+    },
+    "lam0.35": {
+      "lam": 0.35,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.454,
+          "pass@1": 0.454,
+          "pass@2": 0.526,
+          "pass@4": 0.588,
+          "pass@8": 0.648,
+          "pass@16": 0.703,
+          "token_entropy": 0.667
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.441,
+          "pass@1": 0.441,
+          "pass@2": 0.499,
+          "pass@4": 0.53,
+          "pass@8": 0.546,
+          "pass@16": 0.562,
+          "token_entropy": 1.585
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_3_clip1.0-lam0.35-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.35-s42-71271/"
+    },
+    "lam0.50": {
+      "lam": 0.5,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.296,
+          "pass@1": 0.296,
+          "pass@2": 0.349,
+          "pass@4": 0.399,
+          "pass@8": 0.46,
+          "pass@16": 0.531,
+          "token_entropy": 1.114
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.099,
+          "pass@1": 0.099,
+          "pass@2": 0.115,
+          "pass@4": 0.138,
+          "pass@8": 0.169,
+          "pass@16": 0.203,
+          "token_entropy": 0.93
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_4_clip1.0-lam0.50-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.50-s42-71271/"
+    },
+    "lam0.70": {
+      "lam": 0.7,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.162,
+          "pass@1": 0.162,
+          "pass@2": 0.234,
+          "pass@4": 0.295,
+          "pass@8": 0.342,
+          "pass@16": 0.391,
+          "token_entropy": 0.662
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.101,
+          "pass@1": 0.101,
+          "pass@2": 0.148,
+          "pass@4": 0.187,
+          "pass@8": 0.214,
+          "pass@16": 0.234,
+          "token_entropy": 0.721
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_5_clip1.0-lam0.70-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.70-s42-71271/"
+    },
+    "lam0.85": {
+      "lam": 0.85,
+      "seed": 42,
+      "per_token_kl_clip": 1.0,
+      "evals": {
+        "step_250_T0.6": {
+          "step": 250,
+          "temp": 0.6,
+          "accuracy_mean": 0.028,
+          "pass@1": 0.028,
+          "pass@2": 0.043,
+          "pass@4": 0.057,
+          "pass@8": 0.07,
+          "pass@16": 0.094,
+          "token_entropy": 0.817
+        },
+        "step_500_T0.6": {
+          "step": 500,
+          "temp": 0.6,
+          "accuracy_mean": 0.029,
+          "pass@1": 0.029,
+          "pass@2": 0.049,
+          "pass@4": 0.075,
+          "pass@8": 0.104,
+          "pass@16": 0.141,
+          "token_entropy": 0.775
+        }
+      },
+      "log": "/project/inniang/research/harness/logs/exp4cl_6_clip1.0-lam0.85-s42_71271.log",
+      "ckpt": "/project/inniang/research/harness/checkpoints/clip1.0-lam0.85-s42-71271/"
+    }
+  }
+}

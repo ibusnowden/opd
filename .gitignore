@@ -1,0 +1,25 @@
+# Model checkpoints (440G) — never publish
+harness/checkpoints/
+**/checkpoints/
+
+# W&B offline run binaries (841M)
+wandb/
+
+# Training/eval SLURM logs (noisy, machine-specific)
+harness/logs/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Local env / secrets (defensive — none currently tracked)
+*.env
+.mlrunx.env
+*.key
+*credential*
+
+# Editor / OS cruft
+.vscode/
+.DS_Store

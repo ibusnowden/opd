@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/sft-rft-correct-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.392578125,
+      "eval/pass@2": 0.47317708333333336,
+      "eval/pass@4": 0.5484203296703297,
+      "eval/pass@8": 0.6198038073038074,
+      "eval/pass@16": 0.671875,
+      "eval/accuracy_mean": 0.392578125,
+      "eval/solved_any": 0.671875,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 267.4653489589691,
+      "eval/token_entropy": 0.4110182882286608,
+      "eval/distinct_1": 0.04713816857214989,
+      "eval/distinct_2": 0.17738334858188473,
+      "eval/distinct_3": 0.28083794525127215,
+      "eval/distinct_4": 0.3559820519588251
+    }
+  }
+}

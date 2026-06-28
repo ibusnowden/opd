@@ -1,0 +1,70 @@
+# exp7_scale_7b.yaml — Experiment 7: the SCALE test (RESULTS §8.4/§9 "what genuinely stays open").
+#
+# Every result in the document is 1B-student / 7B-teacher. §8.1 follow-up 2 showed that *competence*
+# at fixed 1B size does NOT rescue on-policy pure-OPD: a warm-started 1B (p@1 0.383, on-policy rollouts
+# 50% correct at step 1) is collapsed to 0.003 by on-policy reverse-KL — the §7.6 dead-zone attractor,
+# init-independent. The conclusion explicitly defers the one remaining out: TRUE scale — "a larger
+# student whose on-policy distribution is stable under reverse-KL." This experiment runs it.
+#
+# Setup: NATIVE 7B-SFT student <- 7B-Instruct teacher (same base, shared tokenizer; the teacher is the
+# SAME 7B-Instruct used in §8.1/L3, so the off-policy buffer is reusable). The student is now natively
+# competent on gsm_symbolic, not a warm-started small model. Question: does on-policy pure-OPD finally
+# REVIVE at scale, or does the dead-zone attractor persist? Either outcome is a headline:
+#   * revives  -> the 1B/7B collapse is a capacity-gap / small-student artifact; on-policy-ness is
+#                 load-bearing once the student is big enough (post's claim rescued at scale).
+#   * persists -> on-policy reverse-KL instability is scale-robust, strongly generalizing §8.1.
+#
+# Memory: full-FT 7B + fp32-Adam state is ~84 GB (won't fit one 80 GB H100). We use bnb 8-bit Adam
+# (cfg.fit.optimizer_8bit; embeddings kept 32-bit) -> ~50-58 GB on the student card, with the frozen
+# teacher on a SECOND card (teacher.device_id=1). 2 H100s/arm; 4 arms fill itiger01's 8 H100s.
+#
+# 4 arms (run_exp7_scale_7b.sh), the launcher overriding only alpha / per_token_kl_clip / lam /
+# offpolicy_teacher_states. Base config below == arm A.
+#   A onpolicy-opd-noclip   alpha=1 lam=1 clip=null            -- the DEAD-at-1B arm: does it revive at 7B? (KEY)
+#   B offpolicy-revkd       alpha=0 lam=1 clip=null +buffer    -- the ALIVE-at-1B control (§8.1 L3 was 0.298)
+#   C onpolicy-opd-clip     alpha=1 lam=1 clip=1.0             -- does the clip rescue on-policy at 7B? (1B: ~0.05 dead)
+#   D onpolicy-lowlam-clip  alpha=1 lam=0.10 clip=1.0 grpo     -- the best-1B recipe (§7.7, p@1 0.709): hold at 7B?
+model_name: allenai/OLMo-2-1124-7B-SFT          # STUDENT: natively-competent 7B-SFT (vs 1B-SFT everywhere else)
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs (base == arm A: on-policy pure-OPD) ---
+alpha: 1.0                                       # OVERRIDDEN to 0.0 for arm B (off-policy)
+lam: 1.0                                         # OVERRIDDEN to 0.10 for arm D
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-Instruct    # same teacher as §8.1/L3 (off-policy buffer reusable)
+  device_id: 1                                    # teacher on the SECOND visible card (student on card 0)
+per_token_kl_clip: null                          # OVERRIDDEN to 1.0 for arms C/D
+outcome_loss: grpo                               # unused at lam=1 (arms A/B/C); the anchor branch for arm D
+
+# --- off-policy buffer (arm B only; set by launcher) ---
+# offpolicy_teacher_states: rft_data/gsm_symbolic_from_OLMo-2-1124-7B-Instruct_seed4242_ALL.jsonl
+
+# --- memory/fit: the 7B-enabling knobs ---
+fit:
+  optimizer_8bit: true                           # bnb Adam8bit (embeddings 32-bit) — fits 7B full-FT on one H100
+  gradient_checkpointing: true
+
+# --- training (effective batch 8 == 1B runs; train_batch_size halved + batch_acc doubled for 7B activations) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 2
+batch_acc: 4
+num_steps: 250                                   # 7B is ~7x/step; collapse (if it happens) shows by step ~20-50
+seed: 42
+
+# --- eval done post-hoc in the launcher at the §8.1 matched protocol (T=0.6, 64x16, eval-seed 1e6) ---
+eval_every: 0
+save_ckpt: true
+
+# --- logging (W&B, offline in-job) ---
+wandb_project: distill-harness
+wandb_group: exp7-scale-7b
+wandb_tags: [exp7, scale, gsm_symbolic, "olmo2-7b-sft<-7b-instruct", opd-8bit]

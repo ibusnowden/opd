@@ -1,0 +1,60 @@
+# exp7c_scale_13b_teacher.yaml — Experiment 7c: disambiguate SCALE vs CAPACITY-GAP-CLOSURE (§7.12 caveat).
+#
+# Exp 7 (§7.12) confounded two changes: it made the student bigger (1B->7B) AND closed the capacity gap
+# (student = teacher size, 7B<-7B). This config separates them: same 7B-SFT student, but a GENUINELY
+# BIGGER teacher (13B-Instruct), re-opening a capacity gap while holding student scale fixed.
+#
+# Read (vs the Exp-7 same-size arms A 0.009 / C 0.323):
+#   * A13 still collapses + C13 still ~alive  -> absolute STUDENT SCALE is the driver; the clip rescue
+#     and the small on/off-policy gap generalize across teacher gaps. §7.12's findings stand as scale facts.
+#   * C13 reverts toward the 1B picture (dead) -> CAPACITY-GAP-CLOSURE was the driver; "scale fixes
+#     on-policy OPD" really meant "student≈teacher fixes it". Finding 3 needs a rewrite.
+#
+# Memory: 7B student full-FT w/ bnb 8-bit Adam ~50-58 GB; 13B bf16 frozen teacher ~26 GB -> does NOT
+# co-fit one 80 GB H100. 2 H100s/arm: student card 0, teacher card 1 (teacher.device_id=1).
+#
+# Arms (run_exp7c_arm.sh; base config below == arm A13):
+#   A13 onpolicy-opd-noclip   alpha=1 lam=1   clip=null  -- does the 13B gap re-kill unclipped on-policy faster?
+#   C13 onpolicy-opd-clip     alpha=1 lam=1   clip=1.0   -- THE disambiguator: clip rescue under a real gap?
+#   D13 onpolicy-lowlam-clip  alpha=1 lam=0.1 clip=1.0   -- does the best recipe hold with a bigger teacher?
+model_name: allenai/OLMo-2-1124-7B-SFT          # STUDENT: same 7B-SFT as Exp 7 (held fixed)
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs (base == arm A13: on-policy pure-OPD) ---
+alpha: 1.0
+lam: 1.0                                         # OVERRIDDEN to 0.10 for arm D13
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-13B-Instruct   # THE change vs exp7_scale_7b.yaml (was 7B-Instruct)
+  device_id: 1                                   # teacher on the second card (no co-residency at 13B)
+per_token_kl_clip: null                          # OVERRIDDEN to 1.0 for arms C13/D13
+outcome_loss: grpo                               # unused at lam=1; the anchor branch for arm D13
+
+# --- memory/fit: identical to Exp 7 (the 7B-enabling knobs) ---
+fit:
+  optimizer_8bit: true
+  gradient_checkpointing: true
+
+# --- training: VERBATIM Exp 7 (only the teacher differs) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 2
+batch_acc: 4
+num_steps: 250
+seed: 42
+
+# --- eval done post-hoc in the launcher at the §8.1 matched protocol (T=0.6, 64x16, eval-seed 1e6) ---
+eval_every: 0
+save_ckpt: true
+
+# --- logging (W&B, offline in-job) ---
+wandb_project: distill-harness
+wandb_group: exp7c-scale-13b-teacher
+wandb_tags: [exp7c, scale, capacity-gap, gsm_symbolic, "olmo2-7b-sft<-13b-instruct", opd-8bit]

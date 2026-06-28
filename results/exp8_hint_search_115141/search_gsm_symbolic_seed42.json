@@ -1,0 +1,95 @@
+{
+  "args": {
+    "student": "allenai/OLMo-2-0425-1B-SFT",
+    "teacher": "allenai/OLMo-2-1124-7B-SFT",
+    "mutator": "allenai/OLMo-2-1124-7B-Instruct",
+    "task": "gsm_symbolic",
+    "seed": 42,
+    "n_prompts": 4,
+    "n_rollouts": 2,
+    "gen_prompts": 4,
+    "gen_samples": 1,
+    "population": 6,
+    "children": 2,
+    "generations": 1,
+    "beta": 0.2,
+    "min_disc_support": 5,
+    "temperature": 0.6,
+    "max_new_tokens": 256,
+    "gen_batch_size": 8,
+    "device": null,
+    "out": "/project/inniang/research/results/exp8_hint_search_115141/search_gsm_symbolic_seed42.json",
+    "smoke": true
+  },
+  "student_rollouts": {
+    "n_total": 8,
+    "n_correct": 0
+  },
+  "candidates": [
+    {
+      "hint": "Break the problem into clear steps, solve each part methodically, and check your solution with original conditions.",
+      "teacher_acc": 0.5,
+      "kl_mean": 0.4006466865539551,
+      "kl_p99": 5.226065158843994,
+      "disc": null,
+      "score": -0.5452130317687989,
+      "seconds": 5.9,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "",
+      "teacher_acc": 0.25,
+      "kl_mean": 0.3890989124774933,
+      "kl_p99": 5.579225063323975,
+      "disc": null,
+      "score": -0.865845012664795,
+      "seconds": 4.9,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "First restate the given quantities, then define what is asked, compute intermediate results one at a time, and verify the final answer by substituting it back.",
+      "teacher_acc": 0.25,
+      "kl_mean": 0.4281778931617737,
+      "kl_p99": 5.7054443359375,
+      "disc": null,
+      "score": -0.8910888671875001,
+      "seconds": 5.4,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Think step by step and show every arithmetic operation explicitly.",
+      "teacher_acc": 0.0,
+      "kl_mean": 0.3704972565174103,
+      "kl_p99": 5.054751396179199,
+      "disc": null,
+      "score": -1.0109502792358398,
+      "seconds": 5.9,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Identify key elements, plan your approach, solve systematically, and cross-verify with initial data.",
+      "teacher_acc": 0.0,
+      "kl_mean": 0.41092491149902344,
+      "kl_p99": 5.670415878295898,
+      "disc": null,
+      "score": -1.1340831756591798,
+      "seconds": 5.4,
+      "origin": "gen1/mutated"
+    }
+  ],
+  "pareto_front_hints": [
+    "Think step by step and show every arithmetic operation explicitly.",
+    "Break the problem into clear steps, solve each part methodically, and check your solution with original conditions."
+  ],
+  "best_hint": "Break the problem into clear steps, solve each part methodically, and check your solution with original conditions.",
+  "no_hint_reference": {
+    "hint": "",
+    "teacher_acc": 0.25,
+    "kl_mean": 0.3890989124774933,
+    "kl_p99": 5.579225063323975,
+    "disc": null,
+    "score": -0.865845012664795,
+    "seconds": 4.9,
+    "origin": "gen0/seed"
+  }
+}

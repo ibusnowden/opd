@@ -1,0 +1,54 @@
+# opd-different-teachers.md (#1) — roadmap.md's flagship: does the "SFT-teacher vs RL-teacher" gap
+# shrink once the teacher is same-base / tokenizer-matched, and does any teacher beat plain RL on the
+# student?  Fixed student, fixed everything-else; the launcher (run_opd_teachers.sh) varies ONLY the
+# teacher per arm — three same-base 7B teachers differing only in post-training recipe:
+#     allenai/OLMo-2-1124-7B-SFT       SFT only
+#     allenai/OLMo-2-1124-7B-DPO       SFT + DPO
+#     allenai/OLMo-2-1124-7B-Instruct  SFT + DPO + RLVR/GRPO   (= the "RL teacher")
+# — plus a no-teacher GRPO-on-the-student baseline arm (--set lam=0 --set teacher.kind=none).  Task:
+# reasoning_gym gsm_symbolic (GSM8K-style math), holding init/prompts/rollout-budget/eval constant
+# (every arm uses the hyperparams below verbatim; the launcher only adds --set teacher.model_name / seed).
+# Run by `_run_distill_loop` (lam=1 = plain OPD).  [Phase-1b: add the verbal-judge / rubric / PRM teacher
+# interfaces, and the off-policy-SFT-on-teacher-rollouts arm — those need teachers._build_inputs / train_sft.]
+#
+# Memory: 1B student full-FT + Adam (~12-16 GB) + 7B bf16 frozen teacher (~14 GB) ≈ 30 GB / 80 GB H100.
+model_name: allenai/OLMo-2-0425-1B-SFT      # student: SFT-only 1B (has a chat template for the rollout; room to improve)
+data:
+  specs:
+    - name: gsm_symbolic                    # GSM8K-style math
+  size: 3000
+loss: reinforce                             # base-schema field; lam>0 uses UnifiedTokenLoss
+max_new_tokens: 1024                        # generous cap (gsm_symbolic CoT ~100-300 tokens)
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0                                    # plain OPD; baseline arm overrides -> lam=0, teacher.kind=none
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-SFT    # DEFAULT — launcher overrides per arm (-7B-SFT / -7B-DPO / -7B-Instruct)
+  device_id: 0                              # frozen teacher on the student's card
+per_token_kl_clip: null                     # plain OPD (no OPSD-style per-token clip)
+outcome_loss: grpo                          # used only by the no-teacher baseline arm (and the lam<1 / expert-RL+OPD variant)
+
+# --- training (HELD CONSTANT ACROSS ALL ARMS) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8                       # must equal num_rollouts when num_rollouts > 1
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42                                    # launcher varies this {42, 43} for an error bar
+
+# --- held-out pass@k / accuracy / diversity eval (harness.eval_passk) — same eval for every arm ---
+eval_every: 250                             # evals at steps 250 and 500 (and always the last step)
+eval_n_prompts: 64
+eval_n_samples: 16                          # k_values = [1, 2, 4, 8, 16]
+eval_temps: [0.6]
+# eval prompt set uses seed = seed + eval_seed_offset (1_000_000) — disjoint from the training set.
+save_ckpt: true                             # save_pretrained the final student per arm -> harness/checkpoints/<run_name>/ (for post-hoc pass@k + #5 sparse-vs-dense)
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_group: opd-different-teachers
+wandb_tags: [opd-different-teachers, gsm_symbolic, "olmo2-1b-sft<-7b"]

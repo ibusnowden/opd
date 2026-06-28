@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/opsd-baseline-s42-111363",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.2041015625,
+      "eval/pass@2": 0.2421875,
+      "eval/pass@4": 0.28124141483516485,
+      "eval/pass@8": 0.3288570804195804,
+      "eval/pass@16": 0.390625,
+      "eval/accuracy_mean": 0.2041015625,
+      "eval/solved_any": 0.390625,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 636.2766819000244,
+      "eval/token_entropy": 0.7572733387351036,
+      "eval/distinct_1": 0.05996457788648056,
+      "eval/distinct_2": 0.19874656593406592,
+      "eval/distinct_3": 0.3011626890462453,
+      "eval/distinct_4": 0.3803205699020481
+    }
+  }
+}

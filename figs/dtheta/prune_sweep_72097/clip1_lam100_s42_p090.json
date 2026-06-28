@@ -1,0 +1,46 @@
+{
+  "base": "allenai/OLMo-2-0425-1B-SFT",
+  "ckpt": "harness/checkpoints/clip1.0-lam1.0-s42-71250",
+  "prune_pct_target": 0.9,
+  "prune_stats": {
+    "tau": 0.0007476806640625,
+    "n_moved": 212826884,
+    "n_total": 1484916736,
+    "n_zero": 1272089852,
+    "prune_pct_target": 0.9,
+    "actual_prune_frac_of_moved": 0.9004878772740008,
+    "actual_prune_frac_of_total": 0.12906314835958588,
+    "n_pruned": 191648029,
+    "n_moved_check": 212826884
+  },
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.1611328125,
+      "eval/pass@2": 0.21575520833333334,
+      "eval/pass@4": 0.2617015796703297,
+      "eval/pass@8": 0.3034989316239316,
+      "eval/pass@16": 0.34375,
+      "eval/accuracy_mean": 0.1611328125,
+      "eval/solved_any": 0.34375,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 278.74604630470276,
+      "eval/token_entropy": 0.551224927068688,
+      "eval/distinct_1": 0.06233766233766234,
+      "eval/distinct_2": 0.20467242254951754,
+      "eval/distinct_3": 0.3098140495867769,
+      "eval/distinct_4": 0.38455070940620073
+    }
+  }
+}

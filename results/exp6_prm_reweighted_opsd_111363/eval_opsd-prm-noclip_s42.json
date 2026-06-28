@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/opsd-prm-noclip-s42-111363",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.005859375,
+      "eval/pass@2": 0.010807291666666668,
+      "eval/pass@4": 0.01840659340659341,
+      "eval/pass@8": 0.02700320512820513,
+      "eval/pass@16": 0.03125,
+      "eval/accuracy_mean": 0.005859375,
+      "eval/solved_any": 0.03125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 895.7661654949188,
+      "eval/token_entropy": 0.8838051512138918,
+      "eval/distinct_1": 0.09880478087649402,
+      "eval/distinct_2": 0.18654923939151322,
+      "eval/distinct_3": 0.21882542236524538,
+      "eval/distinct_4": 0.2360549717057397
+    }
+  }
+}

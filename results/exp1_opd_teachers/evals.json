@@ -1,0 +1,194 @@
+{
+  "opd-sft7b-s42": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.002,
+      "pass@1": 0.002,
+      "pass@16": 0.031,
+      "pass@2": 0.004,
+      "pass@4": 0.008,
+      "pass@8": 0.016,
+      "token_entropy": 0.898
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.015,
+      "pass@1": 0.015,
+      "pass@16": 0.141,
+      "pass@2": 0.028,
+      "pass@4": 0.051,
+      "pass@8": 0.088,
+      "token_entropy": 0.585
+    }
+  ],
+  "opd-dpo7b-s42": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.005,
+      "pass@1": 0.005,
+      "pass@16": 0.062,
+      "pass@2": 0.01,
+      "pass@4": 0.019,
+      "pass@8": 0.035,
+      "token_entropy": 2.543
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.009,
+      "pass@1": 0.009,
+      "pass@16": 0.078,
+      "pass@2": 0.017,
+      "pass@4": 0.031,
+      "pass@8": 0.052,
+      "token_entropy": 2.337
+    }
+  ],
+  "opd-instruct7b-s42": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.012,
+      "pass@1": 0.012,
+      "pass@16": 0.125,
+      "pass@2": 0.023,
+      "pass@4": 0.043,
+      "pass@8": 0.077,
+      "token_entropy": 2.709
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.012,
+      "pass@1": 0.012,
+      "pass@16": 0.109,
+      "pass@2": 0.022,
+      "pass@4": 0.041,
+      "pass@8": 0.07,
+      "token_entropy": 2.336
+    }
+  ],
+  "rl-baseline-s42": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.436,
+      "pass@1": 0.436,
+      "pass@16": 0.531,
+      "pass@2": 0.463,
+      "pass@4": 0.487,
+      "pass@8": 0.51,
+      "token_entropy": 0.621
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.523,
+      "pass@1": 0.523,
+      "pass@16": 0.609,
+      "pass@2": 0.556,
+      "pass@4": 0.575,
+      "pass@8": 0.594,
+      "token_entropy": 0.426
+    }
+  ],
+  "opd-sft7b-s43": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.01,
+      "pass@1": 0.01,
+      "pass@16": 0.109,
+      "pass@2": 0.019,
+      "pass@4": 0.037,
+      "pass@8": 0.067,
+      "token_entropy": 0.881
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.012,
+      "pass@1": 0.012,
+      "pass@16": 0.141,
+      "pass@2": 0.023,
+      "pass@4": 0.045,
+      "pass@8": 0.083,
+      "token_entropy": 0.7
+    }
+  ],
+  "opd-dpo7b-s43": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.011,
+      "pass@1": 0.011,
+      "pass@16": 0.141,
+      "pass@2": 0.021,
+      "pass@4": 0.041,
+      "pass@8": 0.079,
+      "token_entropy": 2.264
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.013,
+      "pass@1": 0.013,
+      "pass@16": 0.125,
+      "pass@2": 0.024,
+      "pass@4": 0.045,
+      "pass@8": 0.078,
+      "token_entropy": 2.414
+    }
+  ],
+  "opd-instruct7b-s43": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.003,
+      "pass@1": 0.003,
+      "pass@16": 0.047,
+      "pass@2": 0.006,
+      "pass@4": 0.012,
+      "pass@8": 0.023,
+      "token_entropy": 2.281
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.013,
+      "pass@1": 0.013,
+      "pass@16": 0.125,
+      "pass@2": 0.024,
+      "pass@4": 0.044,
+      "pass@8": 0.076,
+      "token_entropy": 2.611
+    }
+  ],
+  "rl-baseline-s43": [
+    {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.574,
+      "pass@1": 0.574,
+      "pass@16": 0.688,
+      "pass@2": 0.609,
+      "pass@4": 0.639,
+      "pass@8": 0.664,
+      "token_entropy": 2.412
+    },
+    {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.671,
+      "pass@1": 0.671,
+      "pass@16": 0.734,
+      "pass@2": 0.699,
+      "pass@4": 0.719,
+      "pass@8": 0.73,
+      "token_entropy": 0.483
+    }
+  ]
+}

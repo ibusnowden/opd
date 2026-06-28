@@ -1,0 +1,1 @@
+Ensure each step logically follows from the previous, showing all calculations clearly; aim for a simple, straightforward solution.

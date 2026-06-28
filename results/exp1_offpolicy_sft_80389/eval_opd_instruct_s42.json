@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/opd-instruct7b-s42",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.005859375,
+      "eval/pass@2": 0.011588541666666667,
+      "eval/pass@4": 0.022656250000000003,
+      "eval/pass@8": 0.043229166666666666,
+      "eval/pass@16": 0.078125,
+      "eval/accuracy_mean": 0.005859375,
+      "eval/solved_any": 0.078125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 532.5197682380676,
+      "eval/token_entropy": 2.473833506461233,
+      "eval/distinct_1": 0.35555555555555557,
+      "eval/distinct_2": 0.7116564417177914,
+      "eval/distinct_3": 0.8467908902691511,
+      "eval/distinct_4": 0.8930817610062893
+    }
+  }
+}

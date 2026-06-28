@@ -1,0 +1,35 @@
+# RL corner: (alpha=1, lam=0) -> GRPO. Equivalent to a plain policy_gradients GRPO run, just with
+# an OLMo-2 model and W&B logging. The lam==0 path delegates the step to the vendored
+# policy_gradients helpers (research/policy_gradients/ — rollout / compute_* / get_loss_objective).
+model_name: allenai/OLMo-2-0425-1B          # small first (RTX); scale to OLMo-2-1124-7B later.
+data:
+  specs:
+    - name: spell_backward
+  size: 3000
+loss: grpo
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 0.0
+teacher:
+  kind: none
+outcome_loss: grpo
+
+# --- GRPO / clipping ---
+clip_eps_lo: 0.2
+clip_eps_hi: 0.2
+beta: 0.0                                    # optional KL-to-base penalty (0 = off)
+
+# --- training ---
+lr: 5.0e-6
+prompts_per_step: 4
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 2
+batch_acc: 4
+num_steps: 500
+seed: 42
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_tags: [rl, grpo, olmo2-1b]

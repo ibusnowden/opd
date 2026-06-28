@@ -1,0 +1,57 @@
+{
+  "ckpt": "harness/checkpoints/opd-dpo7b-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 128,
+  "n_samples": 64,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.0123291015625,
+      "eval/pass@2": 0.022933717757936508,
+      "eval/pass@4": 0.04033070821450606,
+      "eval/pass@8": 0.06572315358318194,
+      "eval/pass@16": 0.09919733263599931,
+      "eval/pass@32": 0.1384628251432853,
+      "eval/pass@64": 0.171875,
+      "eval/accuracy_mean": 0.0123291015625,
+      "eval/solved_any": 0.171875,
+      "eval/n_prompts": 128.0,
+      "eval/n_samples": 64.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 7009.348551034927,
+      "eval/token_entropy": 2.4565172460861504,
+      "eval/distinct_1": 0.11625429146442524,
+      "eval/distinct_2": 0.31871555236041216,
+      "eval/distinct_3": 0.4540933899332929,
+      "eval/distinct_4": 0.5451866404715128
+    },
+    "T=1.0": {
+      "eval/pass@1": 0.013427734375,
+      "eval/pass@2": 0.024662078373015872,
+      "eval/pass@4": 0.0425410136084775,
+      "eval/pass@8": 0.06776439900043575,
+      "eval/pass@16": 0.10057584686069891,
+      "eval/pass@32": 0.1410553366152013,
+      "eval/pass@64": 0.1875,
+      "eval/accuracy_mean": 0.013427734375,
+      "eval/solved_any": 0.1875,
+      "eval/n_prompts": 128.0,
+      "eval/n_samples": 64.0,
+      "eval/temperature": 1.0,
+      "eval/gen_seconds": 4126.717036962509,
+      "eval/token_entropy": 3.170271153911017,
+      "eval/distinct_1": 0.14244294799850354,
+      "eval/distinct_2": 0.4085239085239085,
+      "eval/distinct_3": 0.5713330786860199,
+      "eval/distinct_4": 0.6769928585215209
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "lam=0.05": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.040184372439980506,
+    "final50_kl_p99": 2.1548512916825713,
+    "final50_heavy_tail_frac": 0.016895732132106787,
+    "final50_abs_max": 23.37772785782814,
+    "final50_teacher_reverse_kl": 0.379561295513995
+  },
+  "lam=0.1": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.021587498523294925,
+    "final50_kl_p99": 2.457867104150355,
+    "final50_heavy_tail_frac": 0.02308549175504595,
+    "final50_abs_max": 25.21502632856369,
+    "final50_teacher_reverse_kl": 0.2506073082657531
+  },
+  "lam=0.2": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.021515623265877366,
+    "final50_kl_p99": 2.9362061693519355,
+    "final50_heavy_tail_frac": 0.0427199805949931,
+    "final50_abs_max": 24.95002994418144,
+    "final50_teacher_reverse_kl": -0.0007574107963591814
+  },
+  "lam=0.35": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.020281248167157172,
+    "final50_kl_p99": 2.0768601807951925,
+    "final50_heavy_tail_frac": 0.013353654574311804,
+    "final50_abs_max": 24.930927321910858,
+    "final50_teacher_reverse_kl": 0.0240002169739455
+  },
+  "lam=0.5": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.02267187342979014,
+    "final50_kl_p99": 1.5144032161310315,
+    "final50_heavy_tail_frac": 0.012692964127054437,
+    "final50_abs_max": 24.808575291633606,
+    "final50_teacher_reverse_kl": 0.14035291761159896
+  },
+  "lam=0.7": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.016515623964369296,
+    "final50_kl_p99": 1.0894897442683578,
+    "final50_heavy_tail_frac": 0.013938923832320142,
+    "final50_abs_max": 24.870675183534622,
+    "final50_teacher_reverse_kl": 0.23630786913912744
+  },
+  "lam=0.85": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.015990623896941544,
+    "final50_kl_p99": 0.9997363243252039,
+    "final50_heavy_tail_frac": 0.011751605659519555,
+    "final50_abs_max": 25.06183069348335,
+    "final50_teacher_reverse_kl": 0.2407551942113787
+  },
+  "lam=1.0": {
+    "n_steps": 500,
+    "final50_reward_accuracy": 0.015221873754635453,
+    "final50_kl_p99": 1.0376063050702213,
+    "final50_heavy_tail_frac": 0.011304609833459836,
+    "final50_abs_max": 25.243514392375946,
+    "final50_teacher_reverse_kl": 0.25984120307024566
+  }
+}

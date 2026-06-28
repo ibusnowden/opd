@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/onpolicy-opd-clip-s42-1g-115093",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.3232421875,
+      "eval/pass@2": 0.42083333333333334,
+      "eval/pass@4": 0.50625,
+      "eval/pass@8": 0.580658750971251,
+      "eval/pass@16": 0.640625,
+      "eval/accuracy_mean": 0.3232421875,
+      "eval/solved_any": 0.640625,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 412.26292967796326,
+      "eval/token_entropy": 0.3863006152678281,
+      "eval/distinct_1": 0.050597708782998504,
+      "eval/distinct_2": 0.1877025377719793,
+      "eval/distinct_3": 0.29078104993597953,
+      "eval/distinct_4": 0.36659595653491495
+    }
+  }
+}

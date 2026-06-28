@@ -1,0 +1,35 @@
+# OPSD corner: (alpha=1, lam=1, teacher=self conditioned on the answer, + per-token KL clip).
+# Teacher = the student model itself, frozen at init, shown the ground-truth answer as privileged
+# context (Zhao et al. 2026). Tokenizer + recipe match are automatic (same model). One OLMo-2 1B
+# loaded twice (student trainable; teacher frozen) — fits a single RTX GPU at this size.
+model_name: allenai/OLMo-2-0425-1B
+data:
+  specs:
+    - name: spell_backward
+  size: 3000
+loss: reinforce
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0
+teacher:
+  kind: self
+  condition_on: answer                      # "answer" -> OPSD; "demo" -> SDFT (Shenfeld et al. 2026)
+  frozen_at_init: true                      # OPSD fixes the teacher to the initial policy
+  device_id: 0
+per_token_kl_clip: 1.0                      # OPSD-style point-wise clip; without it: collapse ~100 steps
+outcome_loss: grpo
+
+# --- training ---
+lr: 1.0e-5
+prompts_per_step: 4
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 2
+batch_acc: 4
+num_steps: 500
+seed: 42
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_tags: [opsd, olmo2-1b]

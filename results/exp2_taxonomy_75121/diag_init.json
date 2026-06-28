@@ -1,0 +1,81 @@
+{
+  "student": "allenai/OLMo-2-0425-1B-SFT",
+  "teacher": "allenai/OLMo-2-1124-7B-SFT",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 4,
+  "T": 0.6,
+  "n_tokens_total": 19878,
+  "completion_accuracy": 0.0,
+  "top_q": 0.1,
+  "n_tokens": 19878,
+  "kl_mean": -0.29122143277822765,
+  "kl_p50": -0.0029081141983624548,
+  "kl_p90": 0.11285203695297241,
+  "kl_p99": 0.7479527145624161,
+  "kl_max": 2.4990387558937073,
+  "kl_heavy_tail_frac": 0.013733776033806218,
+  "abs_top_q": 0.1,
+  "heavy_tail": 5.0,
+  "kl_mean_on_correct": NaN,
+  "kl_mean_on_incorrect": -0.29122143277822765,
+  "topq_correct_frac": 0.0,
+  "overall_correct_frac": 0.0,
+  "topq_correct_lift": NaN,
+  "topq_format_frac": 0.09360845495722195,
+  "overall_format_frac": 0.17169735385853707,
+  "topq_format_lift": 0.5451945114678166,
+  "taxonomy": {
+    "clip_threshold": 1.0,
+    "n_total": 19878,
+    "total_abs_kl": 7523.069234015234,
+    "total_clip_removed_abs_kl": 3471.874283499783,
+    "buckets": {
+      "format": {
+        "n_tokens": 3413,
+        "frac_of_tokens": 0.17169735385853707,
+        "mass_frac": 0.0892387569667958,
+        "mean_kl": -0.12921635236890983,
+        "mean_abs_kl": 0.19670358834417348,
+        "mean_entropy": 0.472582693228789,
+        "corr_frac": 0.0,
+        "frac_of_clip_removed": 0.0540405594361331,
+        "mass_frac_after_clip": 0.1194036140830165
+      },
+      "uncertain": {
+        "n_tokens": 3891,
+        "frac_of_tokens": 0.19574403863567763,
+        "mass_frac": 0.6071484328999092,
+        "mean_kl": -0.9254563352138967,
+        "mean_abs_kl": 1.173893522495469,
+        "mean_entropy": 1.7720475759030736,
+        "corr_frac": 0.0,
+        "frac_of_clip_removed": 0.7038908964450602,
+        "mass_frac_after_clip": 0.5242401366052345
+      },
+      "wrong_confident": {
+        "n_tokens": 33,
+        "frac_of_tokens": 0.0016601267733172352,
+        "mass_frac": 0.014189639516338698,
+        "mean_kl": -3.234837590519226,
+        "mean_abs_kl": 3.234837590519226,
+        "mean_entropy": 0.0997513672336936,
+        "corr_frac": 0.0,
+        "frac_of_clip_removed": 0.021242025046135017,
+        "mass_frac_after_clip": 0.00814574475015113
+      },
+      "content": {
+        "n_tokens": 12541,
+        "frac_of_tokens": 0.630898480732468,
+        "mass_frac": 0.2894231706169563,
+        "mean_kl": -0.13078574191261572,
+        "mean_abs_kl": 0.1736185751119979,
+        "mean_entropy": 0.24869866667310692,
+        "corr_frac": 0.0,
+        "frac_of_clip_removed": 0.22082651907267173,
+        "mass_frac_after_clip": 0.34821050456159774
+      }
+    }
+  },
+  "wall_seconds": 136.47872185707092
+}

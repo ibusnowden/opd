@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/hint-opd-placebo-s44",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.146484375,
+      "eval/pass@2": 0.18971354166666668,
+      "eval/pass@4": 0.22735233516483516,
+      "eval/pass@8": 0.2668269230769231,
+      "eval/pass@16": 0.3125,
+      "eval/accuracy_mean": 0.146484375,
+      "eval/solved_any": 0.3125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 293.0478892326355,
+      "eval/token_entropy": 0.8366304021328688,
+      "eval/distinct_1": 0.06566410285845482,
+      "eval/distinct_2": 0.22474010045555426,
+      "eval/distinct_3": 0.34930448222565685,
+      "eval/distinct_4": 0.4442561433240528
+    }
+  }
+}

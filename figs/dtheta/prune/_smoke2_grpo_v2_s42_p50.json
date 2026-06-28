@@ -1,0 +1,37 @@
+{
+  "base": "allenai/OLMo-2-0425-1B-SFT",
+  "ckpt": "harness/checkpoints/grpo-distill-seed42-71209",
+  "prune_pct_target": 0.5,
+  "prune_stats": {
+    "actual_prune_frac": 0.8645137743265358,
+    "n_pruned": 1283730972,
+    "n_total": 1484916736,
+    "tau": 0.0
+  },
+  "task": "gsm_symbolic",
+  "n_prompts": 16,
+  "n_samples": 4,
+  "k_values": [
+    1,
+    2,
+    4
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.453125,
+      "eval/pass@2": 0.46875,
+      "eval/pass@4": 0.5,
+      "eval/accuracy_mean": 0.453125,
+      "eval/solved_any": 0.5,
+      "eval/n_prompts": 16.0,
+      "eval/n_samples": 4.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 493.45614767074585,
+      "eval/token_entropy": 0.09971966780722141,
+      "eval/distinct_1": 0.12158469945355191,
+      "eval/distinct_2": 0.24596215966774343,
+      "eval/distinct_3": 0.29279700654817586,
+      "eval/distinct_4": 0.31721194879089615
+    }
+  }
+}

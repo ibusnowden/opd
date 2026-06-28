@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/opd-warm-instruct7b-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.001953125,
+      "eval/pass@2": 0.00390625,
+      "eval/pass@4": 0.0078125,
+      "eval/pass@8": 0.015625,
+      "eval/pass@16": 0.03125,
+      "eval/accuracy_mean": 0.001953125,
+      "eval/solved_any": 0.03125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 1326.8837039470673,
+      "eval/token_entropy": 2.677734690718353,
+      "eval/distinct_1": 0.4585987261146497,
+      "eval/distinct_2": 0.7741935483870968,
+      "eval/distinct_3": 0.9019607843137255,
+      "eval/distinct_4": 0.9602649006622517
+    }
+  }
+}

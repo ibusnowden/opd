@@ -1,0 +1,62 @@
+{
+  "job": 71395,
+  "seed_replication_of": 71271,
+  "teacher": "harness/checkpoints/teacher_7B-SFT-gsm",
+  "per_token_kl_clip": 1.0,
+  "task": "gsm_symbolic",
+  "source": "trainer logs / W&B summaries",
+  "replicated_seeds": [43, 44, 45],
+  "combined_seeds": [42, 43, 44, 45],
+  "combined_seed42_source": "results/exp4_clip_lambda_71271/summary.json",
+  "arms": {
+    "lam0.05": {
+      "lam": 0.05,
+      "step_500_T0.6": {
+        "seed42": {"pass@1": 0.638, "pass@16": 0.734, "token_entropy": 0.338},
+        "seed43": {"pass@1": 0.611, "pass@16": 0.719, "token_entropy": 2.812},
+        "seed44": {"pass@1": 0.752, "pass@16": 0.812, "token_entropy": 0.879},
+        "seed45": {"pass@1": 0.633, "pass@16": 0.719, "token_entropy": 0.746},
+        "mean": {"pass@1": 0.659, "pass@16": 0.746, "token_entropy": 1.194},
+        "sd": {"pass@1": 0.057, "pass@16": 0.044, "token_entropy": 1.093}
+      }
+    },
+    "lam0.10": {
+      "lam": 0.1,
+      "step_500_T0.6": {
+        "seed42": {"pass@1": 0.709, "pass@16": 0.812, "token_entropy": 0.976},
+        "seed43": {"pass@1": 0.643, "pass@16": 0.797, "token_entropy": 1.537},
+        "seed44": {"pass@1": 0.770, "pass@16": 0.859, "token_entropy": 1.048},
+        "seed45": {"pass@1": 0.648, "pass@16": 0.734, "token_entropy": 1.168},
+        "mean": {"pass@1": 0.693, "pass@16": 0.801, "token_entropy": 1.182},
+        "sd": {"pass@1": 0.059, "pass@16": 0.052, "token_entropy": 0.246}
+      }
+    },
+    "lam0.20": {
+      "lam": 0.2,
+      "step_500_T0.6": {
+        "seed42": {"pass@1": 0.601, "pass@16": 0.734, "token_entropy": 2.206},
+        "seed43": {"pass@1": 0.606, "pass@16": 0.812, "token_entropy": 2.351},
+        "seed44": {"pass@1": 0.750, "pass@16": 0.844, "token_entropy": 1.457},
+        "seed45": {"pass@1": 0.596, "pass@16": 0.750, "token_entropy": 2.056},
+        "mean": {"pass@1": 0.638, "pass@16": 0.785, "token_entropy": 2.018},
+        "sd": {"pass@1": 0.075, "pass@16": 0.053, "token_entropy": 0.388}
+      }
+    },
+    "lam0.35": {
+      "lam": 0.35,
+      "step_500_T0.6": {
+        "seed42": {"pass@1": 0.441, "pass@16": 0.562, "token_entropy": 1.585},
+        "seed43": {"pass@1": 0.523, "pass@16": 0.672, "token_entropy": 2.085},
+        "seed44": {"pass@1": 0.490, "pass@16": 0.609, "token_entropy": 0.819},
+        "seed45": {"pass@1": 0.405, "pass@16": 0.547, "token_entropy": 0.947},
+        "mean": {"pass@1": 0.465, "pass@16": 0.598, "token_entropy": 1.359},
+        "sd": {"pass@1": 0.052, "pass@16": 0.056, "token_entropy": 0.587}
+      }
+    }
+  },
+  "reference": {
+    "grpo_v2_3seed_mean": {"pass@1": 0.687, "pass@16": 0.786},
+    "grpo_v1_3seed_mean": {"pass@1": 0.661, "pass@16": 0.721}
+  },
+  "reading": "The low-lambda clipped band replicates. lambda=0.10 is the best 4-seed point and is slightly above the GRPO-v2 mean on pass@1/pass@16; lambda=0.35 is a clear transition/falloff point."
+}

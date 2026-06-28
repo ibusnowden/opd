@@ -1,0 +1,81 @@
+{
+  "student": "harness/checkpoints/opsd-clip1.0-lam1.0-s42-75338",
+  "teacher": "allenai/OLMo-2-1124-7B-SFT",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 4,
+  "T": 0.6,
+  "n_tokens_total": 45316,
+  "completion_accuracy": 0.30078125,
+  "top_q": 0.1,
+  "n_tokens": 45316,
+  "kl_mean": -0.08642257584889647,
+  "kl_p50": 0.0027728501008823514,
+  "kl_p90": 0.09241114556789398,
+  "kl_p99": 0.730784960091114,
+  "kl_max": 5.642984449863434,
+  "kl_heavy_tail_frac": 0.0057374878630064435,
+  "abs_top_q": 0.1,
+  "heavy_tail": 5.0,
+  "kl_mean_on_correct": -0.006485458222330489,
+  "kl_mean_on_incorrect": -0.10050374113560266,
+  "topq_correct_frac": 0.1374972412271022,
+  "overall_correct_frac": 0.14977050048547974,
+  "topq_correct_lift": 0.9180528928020278,
+  "topq_format_frac": 0.12381372765393953,
+  "overall_format_frac": 0.17964957189513636,
+  "topq_format_lift": 0.6891957845923012,
+  "taxonomy": {
+    "clip_threshold": 1.0,
+    "n_total": 45316,
+    "total_abs_kl": 7917.851985124473,
+    "total_clip_removed_abs_kl": 3841.2225535704056,
+    "buckets": {
+      "format": {
+        "n_tokens": 8141,
+        "frac_of_tokens": 0.17964957189513636,
+        "mass_frac": 0.07326329803416774,
+        "mean_kl": -0.014706587061633018,
+        "mean_abs_kl": 0.07125512219341615,
+        "mean_entropy": 0.53550006183445,
+        "corr_frac": 0.13450436064365556,
+        "frac_of_clip_removed": 0.016516989445269584,
+        "mass_frac_after_clip": 0.12673276442627157
+      },
+      "uncertain": {
+        "n_tokens": 7888,
+        "frac_of_tokens": 0.17406655485921088,
+        "mass_frac": 0.8184707790806983,
+        "mean_kl": -0.46244562349168145,
+        "mean_abs_kl": 0.8215682660890569,
+        "mean_entropy": 2.327124206473934,
+        "corr_frac": 0.172920892494929,
+        "frac_of_clip_removed": 0.9519386478417513,
+        "mass_frac_after_clip": 0.6927100749819469
+      },
+      "wrong_confident": {
+        "n_tokens": 1,
+        "frac_of_tokens": 2.2067261011563244e-05,
+        "mass_frac": 0.0005139478700155129,
+        "mean_kl": -4.069363162852824,
+        "mean_abs_kl": 4.069363162852824,
+        "mean_entropy": 0.12238383293151855,
+        "corr_frac": 0.0,
+        "frac_of_clip_removed": 0.0007990589246123892,
+        "mass_frac_after_clip": 0.00024530068694980357
+      },
+      "content": {
+        "n_tokens": 29286,
+        "frac_of_tokens": 0.6462618059846412,
+        "mass_frac": 0.10775197501511753,
+        "mean_kl": -0.0049429311150243046,
+        "mean_abs_kl": 0.029132151515213103,
+        "mean_entropy": 0.18851039631091648,
+        "corr_frac": 0.14778392405927748,
+        "frac_of_clip_removed": 0.030745303788366728,
+        "mass_frac_after_clip": 0.18031185990482984
+      }
+    }
+  },
+  "wall_seconds": 324.51059651374817
+}

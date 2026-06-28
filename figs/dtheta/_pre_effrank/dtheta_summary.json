@@ -1,0 +1,123 @@
+[
+  {
+    "label": "rl_baseline_s42",
+    "ckpt": "harness/checkpoints/rl-baseline-s42",
+    "total_params": 1484916736,
+    "mean_abs": 8.501746300625552e-05,
+    "p99_abs": 0.001282194520004723,
+    "top1_pct_mass": 0.573267688652371,
+    "top5_pct_mass": 0.9182224578515445,
+    "changed_gt_1e-4": 0.09287582122624399,
+    "changed_gt_1e-3": 0.018988835895786572
+  },
+  {
+    "label": "grpo_v2_s42",
+    "ckpt": "harness/checkpoints/grpo-distill-seed42-71209",
+    "total_params": 1484916736,
+    "mean_abs": 2.0561912075017093e-05,
+    "p99_abs": 0.000383056335179896,
+    "top1_pct_mass": 0.6315579544217673,
+    "top5_pct_mass": 0.9426705089782124,
+    "changed_gt_1e-4": 0.05864928175604827,
+    "changed_gt_1e-3": 0.00036977561572500644
+  },
+  {
+    "label": "grpo_v2_s43",
+    "ckpt": "harness/checkpoints/grpo-distill-s43-71242",
+    "total_params": 1484916736,
+    "mean_abs": 6.184516164929408e-05,
+    "p99_abs": 0.0010297551496932678,
+    "top1_pct_mass": 0.5692933663104854,
+    "top5_pct_mass": 0.9245305975074287,
+    "changed_gt_1e-4": 0.08536823580676892,
+    "changed_gt_1e-3": 0.013449858616400088
+  },
+  {
+    "label": "clip1_lam005_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam0.05-s42-71271",
+    "total_params": 1484916736,
+    "mean_abs": 0.00011030520804189675,
+    "p99_abs": 0.0015376602987946192,
+    "top1_pct_mass": 0.575280399681645,
+    "top5_pct_mass": 0.9132312539189857,
+    "changed_gt_1e-4": 0.0985824437917234,
+    "changed_gt_1e-3": 0.023635364713902266
+  },
+  {
+    "label": "clip1_lam010_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam0.10-s42-71271",
+    "total_params": 1484916736,
+    "mean_abs": 9.675146797082852e-05,
+    "p99_abs": 0.0014709881071298875,
+    "top1_pct_mass": 0.5765170099180323,
+    "top5_pct_mass": 0.9212537391419704,
+    "changed_gt_1e-4": 0.0942840468461185,
+    "changed_gt_1e-3": 0.021192070647686564
+  },
+  {
+    "label": "clip1_lam020_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam0.20-s42-71271",
+    "total_params": 1484916736,
+    "mean_abs": 9.61504540756003e-05,
+    "p99_abs": 0.001489165780857512,
+    "top1_pct_mass": 0.5703127019266925,
+    "top5_pct_mass": 0.9224881383644201,
+    "changed_gt_1e-4": 0.09586603391729459,
+    "changed_gt_1e-3": 0.020808572103489808
+  },
+  {
+    "label": "clip1_lam050_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam0.50-s42-71271",
+    "total_params": 1484916736,
+    "mean_abs": 3.792674828207566e-05,
+    "p99_abs": 0.0007001452878543125,
+    "top1_pct_mass": 0.6148953635413765,
+    "top5_pct_mass": 0.9400145817333296,
+    "changed_gt_1e-4": 0.08095181860148189,
+    "changed_gt_1e-3": 0.0059396582985264505
+  },
+  {
+    "label": "clip1_lam085_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam0.85-s42-71271",
+    "total_params": 1484916736,
+    "mean_abs": 4.009425106177462e-05,
+    "p99_abs": 0.0007218225793279745,
+    "top1_pct_mass": 0.6144926504296093,
+    "top5_pct_mass": 0.9348752323017975,
+    "changed_gt_1e-4": 0.08562198400730575,
+    "changed_gt_1e-3": 0.006622336295276866
+  },
+  {
+    "label": "clip1_lam100_s42",
+    "ckpt": "harness/checkpoints/clip1.0-lam1.0-s42-71250",
+    "total_params": 1484916736,
+    "mean_abs": 4.1573528752181616e-05,
+    "p99_abs": 0.0007436053508912557,
+    "top1_pct_mass": 0.6111140225158183,
+    "top5_pct_mass": 0.9313508831048674,
+    "changed_gt_1e-4": 0.08922439888446779,
+    "changed_gt_1e-3": 0.0069334736205138
+  },
+  {
+    "label": "v21_lam005_s42_unclip",
+    "ckpt": "harness/checkpoints/exp4gsm_lam0.05_seed42",
+    "total_params": 1484916736,
+    "mean_abs": 0.0001041720129751723,
+    "p99_abs": 0.0015682026137798376,
+    "top1_pct_mass": 0.572743156966811,
+    "top5_pct_mass": 0.9183921944012755,
+    "changed_gt_1e-4": 0.10110666940552576,
+    "changed_gt_1e-3": 0.023973621685186672
+  },
+  {
+    "label": "v21_lam100_s42_unclip",
+    "ckpt": "harness/checkpoints/exp4gsm_lam1.0_seed42",
+    "total_params": 1484916736,
+    "mean_abs": 9.790038454395073e-05,
+    "p99_abs": 0.002027255164567879,
+    "top1_pct_mass": 0.5878526535920556,
+    "top5_pct_mass": 0.9342117379549981,
+    "changed_gt_1e-4": 0.09703140516905387,
+    "changed_gt_1e-3": 0.01756538209281575
+  }
+]

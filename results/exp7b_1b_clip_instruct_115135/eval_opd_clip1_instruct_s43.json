@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/opd-instruct7b-clip1-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.087890625,
+      "eval/pass@2": 0.121875,
+      "eval/pass@4": 0.1583276098901099,
+      "eval/pass@8": 0.20087048368298369,
+      "eval/pass@16": 0.25,
+      "eval/accuracy_mean": 0.087890625,
+      "eval/solved_any": 0.25,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 241.20924401283264,
+      "eval/token_entropy": 0.6819801188539714,
+      "eval/distinct_1": 0.08235657001850709,
+      "eval/distinct_2": 0.24288395370659993,
+      "eval/distinct_3": 0.3558058375634518,
+      "eval/distinct_4": 0.4327325394271001
+    }
+  }
+}

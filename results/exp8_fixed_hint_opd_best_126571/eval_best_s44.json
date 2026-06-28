@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/hint-opd-best-s44",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.2470703125,
+      "eval/pass@2": 0.298828125,
+      "eval/pass@4": 0.3454756181318681,
+      "eval/pass@8": 0.39711295648795647,
+      "eval/pass@16": 0.453125,
+      "eval/accuracy_mean": 0.2470703125,
+      "eval/solved_any": 0.453125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 330.86896991729736,
+      "eval/token_entropy": 0.7757834070362151,
+      "eval/distinct_1": 0.0509081922649203,
+      "eval/distinct_2": 0.19211698989518608,
+      "eval/distinct_3": 0.3014668367346939,
+      "eval/distinct_4": 0.385168859791275
+    }
+  }
+}

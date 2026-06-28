@@ -1,0 +1,30 @@
+# SFT corner of the meta-algorithm: (alpha=0, lam=1, teacher=dataset)  -> cross-entropy on demos.
+# Models: OLMo-2 family (shared tokenizer across 1B/7B/13B/32B -> same-family teachers are clean,
+# no tokenizer-mismatch tax). Start small on a single RTX GPU; scale up only once the loop is solid.
+model_name: allenai/OLMo-2-0425-1B          # smallest OLMo-2; RTX-friendly. Scale: OLMo-2-1124-7B/13B.
+data:
+  specs:
+    - name: spell_backward                  # placeholder reasoning_gym task; swap for your SFT demos
+  size: 3000
+loss: reinforce                             # base-schema field; ignored on the SFT path
+
+# --- meta-algorithm knobs ---
+alpha: 0.0
+lam: 1.0
+teacher:
+  kind: dataset
+outcome_loss: grpo
+
+# --- training ---
+lr: 1.0e-5
+prompts_per_step: 4
+num_rollouts: 1
+rollout_batch_size: 1
+train_batch_size: 2
+batch_acc: 4
+num_steps: 500
+seed: 42
+
+# --- logging (W&B, not MLRunX) ---
+wandb_project: distill-harness
+wandb_tags: [sft, olmo2-1b]

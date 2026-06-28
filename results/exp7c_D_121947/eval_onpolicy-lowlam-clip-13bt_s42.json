@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/onpolicy-lowlam-clip-13bt-s42-121947",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.74609375,
+      "eval/pass@2": 0.795703125,
+      "eval/pass@4": 0.8278073489010989,
+      "eval/pass@8": 0.84691385003885,
+      "eval/pass@16": 0.859375,
+      "eval/accuracy_mean": 0.74609375,
+      "eval/solved_any": 0.859375,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 671.1114799976349,
+      "eval/token_entropy": 1.292809966704226,
+      "eval/distinct_1": 0.02327795240233498,
+      "eval/distinct_2": 0.07982007248092368,
+      "eval/distinct_3": 0.12006205329935177,
+      "eval/distinct_4": 0.15001030290541933
+    }
+  }
+}

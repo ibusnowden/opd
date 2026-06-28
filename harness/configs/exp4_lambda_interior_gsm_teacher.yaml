@@ -1,0 +1,51 @@
+# exp4_lambda_interior_gsm_teacher.yaml — RESULTS.md §7.2 Step 3: positive-control ablation.
+# Same config as exp4_lambda_interior.yaml EXCEPT the teacher is the task-specialized
+# `-7B-SFT-gsm` checkpoint produced by harness.train_sft_rft on verifier-accepted -7B-Instruct
+# rollouts.  Tests whether **state-coverage** (teacher overlaps student's reachable trajectories)
+# is the bottleneck in OPD: if pass@1 climbs meaningfully over Exp 1's off-the-shelf -7B-SFT
+# baseline (mean 0.024), the lock-in mechanism is conditional on teacher-task-alignment; if it
+# stays at ~0.01-0.04, reverse-KL + 1B/7B capacity-gap is fundamental at this scale.
+#
+# Held FIXED vs Exp 4 v2: student -1B-SFT, gsm_symbolic, α=1, outcome=grpo, 500 steps,
+# prompts_per_step=8 × num_rollouts=8 × max_new=1024, eval @ 250/500, save_ckpt.
+# CHANGED: teacher.model_name → harness/checkpoints/teacher_7B-SFT-gsm/ (the local SFT-trained
+# specialization).
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0                                     # OVERRIDDEN PER ARM by run_exp4_lambda_gsm_teacher.sh
+teacher:
+  kind: same_family
+  model_name: /project/inniang/research/harness/checkpoints/teacher_7B-SFT-gsm
+  device_id: 0
+per_token_kl_clip: null
+outcome_loss: grpo
+
+# --- training (HELD CONSTANT vs Exp 4 v2) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval (HELD CONSTANT vs Exp 4 v2) ---
+eval_every: 250
+eval_n_prompts: 64
+eval_n_samples: 16
+eval_temps: [0.6]
+save_ckpt: true
+
+# --- logging ---
+wandb_project: distill-harness
+wandb_group: exp4-positive-control-gsm-teacher
+wandb_tags: [exp4, positive-control, gsm_symbolic, "olmo2-1b-sft<-7b-sft-gsm"]

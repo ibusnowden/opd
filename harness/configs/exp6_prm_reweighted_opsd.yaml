@@ -1,0 +1,71 @@
+# exp6_prm_reweighted_opsd.yaml — PRM-reweighted OPSD (prms-as-teachers.md variant (c)).
+#
+# RESULTS §8.4 / §9 name this the "natural next experiment": a process reward's per-token importance
+# REWEIGHTS the OPSD teacher reverse-KL term, redistributing mass toward causally-important (content/
+# pivot) tokens instead of bluntly clipping the uncertain outliers (§5 taxonomy: pure OPD dumps most
+# |KL| mass on uncertain tokens, only ~17% on content). The PRM here is SELF-REFERENTIAL — no
+# separately-trained PRM (the proposal's line-52 open question):
+#     g_t = log pi_T^answer(y_t) - log pi_T^no-answer(y_t)
+# the "value of knowing the answer" at each token, from the SAME 7B-SFT teacher (answer-conditioned
+# forward minus a matched no-answer forward). Large on tokens the ground-truth answer disambiguates
+# (content/pivot), ~0 on stylistic tokens. Mapped to a mass-preserving softmax weight w_t
+# (harness/distill_losses.py::prm_importance_weights), then a_teacher_t = w_t * clip(log pi_T^answer - log pi_theta).
+#
+# Headline test (prms-as-teachers.md line 45): does PRM-reweighting make OPSD safe WITHOUT the blunt
+# per_token_kl_clip? 4 arms (run_exp6_prm_reweighted_opsd.sh), each at lam=1, everything else == Exp 5:
+#   A clip=1.0  prm=off   (OPSD baseline — Exp-5 4-seed p@1 ~0.252)
+#   B clip=null prm=off   (does unclipped OPSD collapse? §7.7 says yes)
+#   C clip=null prm=on    (THE CONJECTURE: reweighting REPLACES the blunt clip)
+#   D clip=1.0  prm=on    (do reweight + clip stack?)
+#
+# Held FIXED vs Exp 5 (exp5_opsd_lambda.yaml): student -1B-SFT, gsm_symbolic, alpha=1, lam=1, 500 steps,
+# prompts_per_step=8 × num_rollouts=8 × max_new=1024, eval @ 250/500, save_ckpt. The launcher overrides
+# only per_token_kl_clip and prm_reweight per arm.
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0                                      # pure OPSD; PRM-reweighting is wired at lam==1
+teacher:
+  kind: self                                  # PrivilegedInfoTeacher (harness/teachers.py)
+  model_name: allenai/OLMo-2-1124-7B-SFT      # same teacher as §7 / Exp 5 (matched comparison)
+  condition_on: answer                        # OPSD-style; answer comes from entry["answer"]
+  frozen_at_init: true
+  device_id: 0
+per_token_kl_clip: 1.0                         # OVERRIDDEN PER ARM (null for B/C) by the launcher
+outcome_loss: grpo                             # unused at lam=1
+
+# --- PRM-reweighted OPSD (variant c) ---
+prm_reweight: false                            # OVERRIDDEN PER ARM (true for C/D) by the launcher
+prm_source: answer_info_gain                   # self-referential; no separately-trained PRM
+prm_weight_fn: softmax                         # mass-preserving softmax-over-importance
+prm_temperature: 1.0                           # softmax sharpness (higher = flatter -> uniform == plain OPSD)
+prm_weight_ceiling: null                       # uncapped (a cap is itself a soft clip -> leave off for the no-clip arm)
+
+# --- training (HELD CONSTANT vs Exp 5) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval (HELD CONSTANT vs Exp 5) ---
+eval_every: 250
+eval_n_prompts: 64
+eval_n_samples: 16
+eval_temps: [0.6]
+save_ckpt: true
+
+# --- logging ---
+wandb_project: distill-harness
+wandb_group: exp6-prm-reweighted-opsd
+wandb_tags: [exp6, prms-as-teachers, opsd, prm-reweight, gsm_symbolic, "olmo2-1b-sft<-7b-sft+answer"]

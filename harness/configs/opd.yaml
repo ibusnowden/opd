@@ -1,0 +1,45 @@
+# OPD corner: (alpha=1, lam=1, teacher=same_family) -> on-policy distillation.  Run by `_run_distill_loop`.
+# Student = OLMo-2 1B-Instruct, teacher = OLMo-2 7B-Instruct. Same tokenizer across the OLMo-2 family, so
+# the per-token reverse-KL is well-defined and there's no tokenizer-mismatch tax (that's the whole reason
+# we use OLMo here — see ../cross-family-teacher-tax.md).  NOTE the student is the *-Instruct* checkpoint:
+# the reasoning_gym rollout calls tokenizer.apply_chat_template, so the base OLMo-2-0425-1B (no chat
+# template) fails fast there.
+# Memory: 1B full-FT + Adam (~12-20 GB) + 7B bf16 frozen teacher (~14 GB) ≈ 30 GB -> fits an 80 GB H100
+# easily (also the 48 GB RTX). For a 13B teacher: set fit.teacher_load_in_8bit (needs bitsandbytes);
+# for 32B: fit.teacher_load_in_4bit, or fit.teacher_vllm_url to serve it elsewhere. (See harness/README.md.)
+model_name: allenai/OLMo-2-0425-1B-Instruct
+data:
+  specs:
+    - name: spell_backward
+  size: 3000
+loss: reinforce                             # base-schema field; lam>0 uses UnifiedTokenLoss
+max_new_tokens: 1024                         # generous cap; spell_backward completions are short
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 1.0
+teacher:
+  kind: same_family
+  model_name: allenai/OLMo-2-1124-7B-Instruct
+  device_id: 0                              # frozen teacher on the same card as the student (fits at 1B<-7B)
+per_token_kl_clip: null                     # not needed for a well-matched real teacher
+outcome_loss: grpo                          # unused at lam=1, kept for the expert-RL+OPD variant
+
+# memory/fit knobs (defaults are fine for 1B<-7B on 48 GB; bump these when you scale the teacher):
+# fit:
+#   teacher_load_in_8bit: true              # 13B teacher (~13 GB) — needs `pip install bitsandbytes`
+#   teacher_vllm_url: "http://localhost:8000/v1"   # or serve the teacher with vLLM, request prompt logprobs
+
+# --- training (batch sizes bumped from the 48 GB-RTX defaults for the 80 GB H100) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8                       # must equal num_rollouts when num_rollouts > 1
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_tags: [opd, "olmo2-1b<-7b"]

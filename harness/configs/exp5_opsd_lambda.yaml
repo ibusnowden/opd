@@ -1,0 +1,61 @@
+# exp5_opsd_lambda.yaml — Exp 5 (prms-as-teachers): OPSD-style answer-conditioned self-teacher.
+#
+# Tests the prms-as-teachers.md headline question: does conditioning the teacher on PRIVILEGED INFO
+# (here: the ground-truth answer prepended to the user message) change the (α, λ, clip) results
+# in §7.7? Specifically:
+#  - Does pure OPD λ=1 escape its dead corner when the teacher knows the answer?
+#    (§7.7: clipped λ=1 stays dead at p@1 ≈ 0.02. The "state-space lock-in" mechanism in §7.2 said
+#     the teacher's per-token signal lands on globally-wrong trajectories. An answer-conditioned
+#     teacher's per-token signal is on answer-aimed trajectories — does that fix it?)
+#  - Does the low-λ clipped winner band (§7.7 λ=0.10 at 0.693 p@1) shift / improve under OPSD?
+#  - Does the §5 taxonomy shift toward content (high-information answer-conditioned signal)
+#    rather than uncertain (the §5 pure-OPD failure pattern)?
+#
+# Teacher is the same 7B-SFT used as the §7 reference logit-teacher, but answer-conditioned
+# (kind=self + model_name=7B-SFT + condition_on=answer). Implementation: harness/teachers.py
+# PrivilegedInfoTeacher batched answer-prepended chat-template + slice-back.
+#
+# Held FIXED vs §7.7 clip1_lam* sweep: student -1B-SFT, gsm_symbolic, α=1, outcome=grpo,
+# 500 steps, prompts_per_step=8 × num_rollouts=8 × max_new=1024, eval @ 250/500, save_ckpt.
+# CHANGED: teacher.kind/model_name/condition_on, per_token_kl_clip=1.0 (fixed at §7.7's best).
+model_name: allenai/OLMo-2-0425-1B-SFT
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm knobs ---
+alpha: 1.0
+lam: 0.10                                    # OVERRIDDEN PER ARM by run_exp5_opsd_lambda.sh
+teacher:
+  kind: self                                 # PrivilegedInfoTeacher (harness/teachers.py)
+  model_name: allenai/OLMo-2-1124-7B-SFT     # same teacher as §7 (matched-comparison)
+  condition_on: answer                       # OPSD-style; answer comes from entry["answer"]
+  frozen_at_init: true
+  device_id: 0
+per_token_kl_clip: 1.0                       # §7.7's winning clip threshold
+outcome_loss: grpo
+
+# --- training (HELD CONSTANT vs §7.7) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval (HELD CONSTANT vs §7.7) ---
+eval_every: 250
+eval_n_prompts: 64
+eval_n_samples: 16
+eval_temps: [0.6]
+save_ckpt: true
+
+# --- logging ---
+wandb_project: distill-harness
+wandb_group: exp5-opsd-answer
+wandb_tags: [exp5, prms-as-teachers, opsd, gsm_symbolic, "olmo2-1b-sft<-7b-sft+answer"]

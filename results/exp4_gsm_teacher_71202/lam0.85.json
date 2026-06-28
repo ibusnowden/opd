@@ -1,0 +1,32 @@
+{
+  "lam": 0.85,
+  "seed": 42,
+  "teacher": "harness/checkpoints/teacher_7B-SFT-gsm",
+  "train_minutes": 394.8,
+  "evals": {
+    "step_250_T0.6": {
+      "step": 250,
+      "temp": 0.6,
+      "accuracy_mean": 0.003,
+      "pass@1": 0.003,
+      "pass@2": 0.006,
+      "pass@4": 0.011,
+      "pass@8": 0.02,
+      "pass@16": 0.031,
+      "token_entropy": 1.123
+    },
+    "step_500_T0.6": {
+      "step": 500,
+      "temp": 0.6,
+      "accuracy_mean": 0.021,
+      "pass@1": 0.021,
+      "pass@2": 0.039,
+      "pass@4": 0.067,
+      "pass@8": 0.106,
+      "pass@16": 0.156,
+      "token_entropy": 1.495
+    }
+  },
+  "log": "/project/inniang/research/harness/logs/exp4gsm_lam0.85_seed42_71202.log",
+  "ckpt": "/project/inniang/research/harness/checkpoints/exp4gsm_lam0.85_seed42/"
+}

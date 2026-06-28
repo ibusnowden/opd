@@ -1,0 +1,308 @@
+{
+  "args": {
+    "student": "allenai/OLMo-2-0425-1B-SFT",
+    "teacher": "allenai/OLMo-2-1124-7B-SFT",
+    "mutator": "allenai/OLMo-2-1124-7B-Instruct",
+    "task": "gsm_symbolic",
+    "seed": 42,
+    "n_prompts": 64,
+    "n_rollouts": 4,
+    "gen_prompts": 32,
+    "gen_samples": 2,
+    "population": 6,
+    "children": 6,
+    "generations": 3,
+    "beta": 0.2,
+    "min_disc_support": 5,
+    "temperature": 0.6,
+    "max_new_tokens": 1024,
+    "gen_batch_size": 8,
+    "device": null,
+    "out": "/project/inniang/research/results/exp8_hint_search_115142/search_gsm_symbolic_seed42.json",
+    "smoke": false
+  },
+  "student_rollouts": {
+    "n_total": 256,
+    "n_correct": 1
+  },
+  "candidates": [
+    {
+      "hint": "Ensure each step logically follows from the previous, showing all calculations clearly; aim for a simple, straightforward solution.",
+      "teacher_acc": 0.546875,
+      "kl_mean": 0.33489158749580383,
+      "kl_p99": 4.88076114654541,
+      "disc": null,
+      "score": -0.4292772293090821,
+      "seconds": 64.9,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "Simplify the problem by breaking it into small, manageable parts; solve each part clearly.",
+      "teacher_acc": 0.453125,
+      "kl_mean": 0.33194035291671753,
+      "kl_p99": 4.617531776428223,
+      "disc": null,
+      "score": -0.4703813552856446,
+      "seconds": 94.9,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "Be concise: give only the minimal chain of calculations needed, then the final answer.",
+      "teacher_acc": 0.4375,
+      "kl_mean": 0.3203183114528656,
+      "kl_p99": 4.586404323577881,
+      "disc": null,
+      "score": -0.47978086471557624,
+      "seconds": 90.5,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "",
+      "teacher_acc": 0.46875,
+      "kl_mean": 0.33158424496650696,
+      "kl_p99": 4.96981954574585,
+      "disc": null,
+      "score": -0.52521390914917,
+      "seconds": 62.3,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Double-check each intermediate result before using it in the next step.",
+      "teacher_acc": 0.46875,
+      "kl_mean": 0.3410690724849701,
+      "kl_p99": 5.10237979888916,
+      "disc": null,
+      "score": -0.5517259597778321,
+      "seconds": 61.8,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Prioritize clear and organized presentation of each calculation, ensuring logical progression.",
+      "teacher_acc": 0.5,
+      "kl_mean": 0.3400130867958069,
+      "kl_p99": 5.2604193687438965,
+      "disc": null,
+      "score": -0.5520838737487794,
+      "seconds": 71.2,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Prioritize precision: verify each calculation and clearly articulate each intermediate and final result.",
+      "teacher_acc": 0.484375,
+      "kl_mean": 0.34104499220848083,
+      "kl_p99": 5.232447147369385,
+      "disc": null,
+      "score": -0.5621144294738769,
+      "seconds": 78.3,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "Break down the problem into smaller, manageable parts; solve each part step-by-step.",
+      "teacher_acc": 0.390625,
+      "kl_mean": 0.3380320966243744,
+      "kl_p99": 4.774689197540283,
+      "disc": null,
+      "score": -0.5643128395080567,
+      "seconds": 98.9,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Simplify the problem by breaking it down into essential parts, focusing on one operation at a time, and ensuring each step logically leads to the next.",
+      "teacher_acc": 0.390625,
+      "kl_mean": 0.3407110273838043,
+      "kl_p99": 4.7779860496521,
+      "disc": null,
+      "score": -0.56497220993042,
+      "seconds": 124.3,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "Identify key operations and apply them methodically, checking each intermediate calculation.",
+      "teacher_acc": 0.359375,
+      "kl_mean": 0.3278321325778961,
+      "kl_p99": 4.688363075256348,
+      "disc": null,
+      "score": -0.5782976150512695,
+      "seconds": 87.6,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "Organize your thoughts: outline the problem's requirements and your path to resolution clearly, maintaining coherence throughout.",
+      "teacher_acc": 0.28125,
+      "kl_mean": 0.32581600546836853,
+      "kl_p99": 4.392269134521484,
+      "disc": null,
+      "score": -0.597203826904297,
+      "seconds": 121.4,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Clarify the question and organize steps logically; focus on clear, step-by-step solution.",
+      "teacher_acc": 0.390625,
+      "kl_mean": 0.33718472719192505,
+      "kl_p99": 4.940608978271484,
+      "disc": null,
+      "score": -0.5974967956542969,
+      "seconds": 93.7,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "Think step by step and show every arithmetic operation explicitly.",
+      "teacher_acc": 0.25,
+      "kl_mean": 0.3061073422431946,
+      "kl_p99": 4.363571643829346,
+      "disc": null,
+      "score": -0.6227143287658692,
+      "seconds": 103.4,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Work the problem in short numbered steps, one calculation per step.",
+      "teacher_acc": 0.25,
+      "kl_mean": 0.32025033235549927,
+      "kl_p99": 4.387167453765869,
+      "disc": null,
+      "score": -0.6274334907531739,
+      "seconds": 92.1,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Analyze first, strategize the solution path, then execute with precision, confirming each step's correctness.",
+      "teacher_acc": 0.4375,
+      "kl_mean": 0.34086403250694275,
+      "kl_p99": 5.358933925628662,
+      "disc": null,
+      "score": -0.6342867851257326,
+      "seconds": 68.0,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Strive for a methodical approach: set up the problem, compute carefully, then conclude with the final answer.",
+      "teacher_acc": 0.390625,
+      "kl_mean": 0.33726048469543457,
+      "kl_p99": 5.233745098114014,
+      "disc": null,
+      "score": -0.6561240196228029,
+      "seconds": 64.1,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Concentrate on the flow of information: start with given facts, lead to the question, and then derive the answer sequentially.",
+      "teacher_acc": 0.375,
+      "kl_mean": 0.34626102447509766,
+      "kl_p99": 5.227025032043457,
+      "disc": null,
+      "score": -0.6704050064086915,
+      "seconds": 86.1,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "Prioritize clarity: outline the problem's goal, show each calculation step, and confirm with the final answer.",
+      "teacher_acc": 0.375,
+      "kl_mean": 0.3448489308357239,
+      "kl_p99": 5.250400543212891,
+      "disc": null,
+      "score": -0.6750801086425782,
+      "seconds": 76.7,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "You are a meticulous grade-school math teacher demonstrating a clean worked solution.",
+      "teacher_acc": 0.4375,
+      "kl_mean": 0.3476056158542633,
+      "kl_p99": 5.591146469116211,
+      "disc": null,
+      "score": -0.6807292938232423,
+      "seconds": 116.9,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Focus on clarity: articulate the method and the why behind each operation, maintain a direct path to the solution.",
+      "teacher_acc": 0.4375,
+      "kl_mean": 0.3516516089439392,
+      "kl_p99": 5.647996425628662,
+      "disc": null,
+      "score": -0.6920992851257324,
+      "seconds": 66.7,
+      "origin": "gen2/mutated"
+    },
+    {
+      "hint": "Begin by restating all given information accurately; then, methodically apply arithmetic operations.",
+      "teacher_acc": 0.21875,
+      "kl_mean": 0.3275579512119293,
+      "kl_p99": 4.5738043785095215,
+      "disc": null,
+      "score": -0.6960108757019043,
+      "seconds": 116.6,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "Evaluate the question's type and apply appropriate operations meticulously, maintaining a clear and logical workflow.",
+      "teacher_acc": 0.328125,
+      "kl_mean": 0.3409793972969055,
+      "kl_p99": 5.198416709899902,
+      "disc": null,
+      "score": -0.7115583419799805,
+      "seconds": 92.2,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "Focus on a structured approach: summarize the problem, perform calculations step by step, and validate the solution.",
+      "teacher_acc": 0.34375,
+      "kl_mean": 0.3501363694667816,
+      "kl_p99": 5.355966567993164,
+      "disc": null,
+      "score": -0.7274433135986329,
+      "seconds": 63.7,
+      "origin": "gen1/mutated"
+    },
+    {
+      "hint": "Identify key operations needed before performing calculations; ensure all steps are transparent and coherent.",
+      "teacher_acc": 0.265625,
+      "kl_mean": 0.35326245427131653,
+      "kl_p99": 5.275031566619873,
+      "disc": null,
+      "score": -0.7893813133239747,
+      "seconds": 120.2,
+      "origin": "gen3/mutated"
+    },
+    {
+      "hint": "First restate the given quantities, then define what is asked, compute intermediate results one at a time, and verify the final answer by substituting it back.",
+      "teacher_acc": 0.234375,
+      "kl_mean": 0.35032007098197937,
+      "kl_p99": 5.136866569519043,
+      "disc": null,
+      "score": -0.7929983139038086,
+      "seconds": 90.2,
+      "origin": "gen0/seed"
+    },
+    {
+      "hint": "Identify the type of word problem and the operations it needs before doing any arithmetic.",
+      "teacher_acc": 0.09375,
+      "kl_mean": 0.36600324511528015,
+      "kl_p99": 5.412021636962891,
+      "disc": null,
+      "score": -0.9886543273925781,
+      "seconds": 86.3,
+      "origin": "gen0/seed"
+    }
+  ],
+  "pareto_front_hints": [
+    "Think step by step and show every arithmetic operation explicitly.",
+    "Be concise: give only the minimal chain of calculations needed, then the final answer.",
+    "Ensure each step logically follows from the previous, showing all calculations clearly; aim for a simple, straightforward solution.",
+    "Organize your thoughts: outline the problem's requirements and your path to resolution clearly, maintaining coherence throughout.",
+    "Simplify the problem by breaking it into small, manageable parts; solve each part clearly."
+  ],
+  "best_hint": "Ensure each step logically follows from the previous, showing all calculations clearly; aim for a simple, straightforward solution.",
+  "no_hint_reference": {
+    "hint": "",
+    "teacher_acc": 0.46875,
+    "kl_mean": 0.33158424496650696,
+    "kl_p99": 4.96981954574585,
+    "disc": null,
+    "score": -0.52521390914917,
+    "seconds": 62.3,
+    "origin": "gen0/seed"
+  }
+}

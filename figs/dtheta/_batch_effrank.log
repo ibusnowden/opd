@@ -1,0 +1,60 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:33,  5.25it/s]Loading weights:  44%|████▍     | 79/179 [00:00<00:00, 335.01it/s]Loading weights:  71%|███████   | 127/179 [00:00<00:00, 389.78it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 367.19it/s]
+[Δθ] loaded allenai/OLMo-2-0425-1B-SFT in 1.7s (179 tensors)
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:30,  5.83it/s]Loading weights:  39%|███▊      | 69/179 [00:00<00:00, 302.63it/s]Loading weights:  77%|███████▋  | 137/179 [00:00<00:00, 447.78it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 421.19it/s]
+[Δθ] loaded harness/checkpoints/rl-baseline-s42 in 0.6s (179 tensors)
+[Δθ] measured rl_baseline_s42 in 351.8s
+[Δθ] wrote figs/dtheta/dtheta_rl_baseline_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:19,  9.00it/s]Loading weights:   1%|          | 2/179 [00:00<00:19,  9.24it/s]Loading weights:  56%|█████▌    | 100/179 [00:00<00:00, 430.30it/s]Loading weights:  88%|████████▊ | 157/179 [00:00<00:00, 482.13it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 406.50it/s]
+[Δθ] loaded harness/checkpoints/grpo-distill-seed42-71209 in 0.6s (179 tensors)
+[Δθ] measured grpo_v2_s42 in 343.2s
+[Δθ] wrote figs/dtheta/dtheta_grpo_v2_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:22,  7.90it/s]Loading weights:  32%|███▏      | 58/179 [00:00<00:00, 296.85it/s]Loading weights:  63%|██████▎   | 113/179 [00:00<00:00, 401.51it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 421.93it/s]
+[Δθ] loaded harness/checkpoints/grpo-distill-s43-71242 in 0.6s (179 tensors)
+[Δθ] measured grpo_v2_s43 in 341.1s
+[Δθ] wrote figs/dtheta/dtheta_grpo_v2_s43.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:27,  6.42it/s]Loading weights:  32%|███▏      | 58/179 [00:00<00:00, 265.74it/s]Loading weights:  63%|██████▎   | 112/179 [00:00<00:00, 372.33it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 385.36it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam0.05-s42-71271 in 0.6s (179 tensors)
+[Δθ] measured clip1_lam005_s42 in 424.5s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam005_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:26,  6.74it/s]Loading weights:  38%|███▊      | 68/179 [00:00<00:00, 327.27it/s]Loading weights:  69%|██████▊   | 123/179 [00:00<00:00, 417.92it/s]Loading weights:  95%|█████████▍| 170/179 [00:00<00:00, 415.84it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 383.71it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam0.10-s42-71271 in 0.7s (179 tensors)
+[Δθ] measured clip1_lam010_s42 in 344.6s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam010_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:35,  4.99it/s]Loading weights:  39%|███▉      | 70/179 [00:00<00:00, 285.17it/s]Loading weights:  73%|███████▎  | 131/179 [00:00<00:00, 400.27it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 364.64it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam0.20-s42-71271 in 0.7s (179 tensors)
+[Δθ] measured clip1_lam020_s42 in 387.2s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam020_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:23,  7.53it/s]Loading weights:  32%|███▏      | 57/179 [00:00<00:00, 287.44it/s]Loading weights:  58%|█████▊    | 104/179 [00:00<00:00, 355.71it/s]Loading weights:  93%|█████████▎| 167/179 [00:00<00:00, 438.57it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 387.30it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam0.50-s42-71271 in 0.7s (179 tensors)
+[Δθ] measured clip1_lam050_s42 in 344.4s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam050_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:18,  9.44it/s]Loading weights:  55%|█████▌    | 99/179 [00:00<00:00, 566.10it/s]Loading weights:  94%|█████████▍| 168/179 [00:00<00:00, 614.02it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 571.48it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam0.85-s42-71271 in 0.5s (179 tensors)
+[Δθ] measured clip1_lam085_s42 in 335.2s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam085_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:23,  7.54it/s]Loading weights:  45%|████▍     | 80/179 [00:00<00:00, 407.69it/s]Loading weights:  85%|████████▌ | 153/179 [00:00<00:00, 541.38it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 495.18it/s]
+[Δθ] loaded harness/checkpoints/clip1.0-lam1.0-s42-71250 in 0.6s (179 tensors)
+[Δθ] measured clip1_lam100_s42 in 341.5s
+[Δθ] wrote figs/dtheta/dtheta_clip1_lam100_s42.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:31,  5.70it/s]Loading weights:  38%|███▊      | 68/179 [00:00<00:00, 294.69it/s]Loading weights:  64%|██████▍   | 115/179 [00:00<00:00, 361.59it/s]Loading weights:  94%|█████████▍| 168/179 [00:00<00:00, 418.33it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 366.38it/s]
+[Δθ] loaded harness/checkpoints/exp4gsm_lam0.05_seed42 in 0.7s (179 tensors)
+[Δθ] measured v21_lam005_s42_unclip in 344.4s
+[Δθ] wrote figs/dtheta/dtheta_v21_lam005_s42_unclip.json
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:25,  6.88it/s]Loading weights:  32%|███▏      | 58/179 [00:00<00:00, 285.71it/s]Loading weights:  61%|██████    | 109/179 [00:00<00:00, 377.25it/s]Loading weights:  89%|████████▉ | 159/179 [00:00<00:00, 416.72it/s]Loading weights: 100%|██████████| 179/179 [00:00<00:00, 380.02it/s]
+[Δθ] loaded harness/checkpoints/exp4gsm_lam1.0_seed42 in 0.6s (179 tensors)
+[Δθ] measured v21_lam100_s42_unclip in 341.4s
+[Δθ] wrote figs/dtheta/dtheta_v21_lam100_s42_unclip.json
+
+[Δθ] batch summary: figs/dtheta/dtheta_summary.json
+  rl_baseline_s42            top1%mass=0.573  top5%mass=0.918  changed>1e-4=0.093  >1e-3=0.019  p99|Δθ|=1.28e-03
+  grpo_v2_s42                top1%mass=0.632  top5%mass=0.943  changed>1e-4=0.059  >1e-3=0.000  p99|Δθ|=3.83e-04
+  grpo_v2_s43                top1%mass=0.569  top5%mass=0.925  changed>1e-4=0.085  >1e-3=0.013  p99|Δθ|=1.03e-03
+  clip1_lam005_s42           top1%mass=0.575  top5%mass=0.913  changed>1e-4=0.099  >1e-3=0.024  p99|Δθ|=1.54e-03
+  clip1_lam010_s42           top1%mass=0.577  top5%mass=0.921  changed>1e-4=0.094  >1e-3=0.021  p99|Δθ|=1.47e-03
+  clip1_lam020_s42           top1%mass=0.570  top5%mass=0.922  changed>1e-4=0.096  >1e-3=0.021  p99|Δθ|=1.49e-03
+  clip1_lam050_s42           top1%mass=0.615  top5%mass=0.940  changed>1e-4=0.081  >1e-3=0.006  p99|Δθ|=7.00e-04
+  clip1_lam085_s42           top1%mass=0.614  top5%mass=0.935  changed>1e-4=0.086  >1e-3=0.007  p99|Δθ|=7.22e-04
+  clip1_lam100_s42           top1%mass=0.611  top5%mass=0.931  changed>1e-4=0.089  >1e-3=0.007  p99|Δθ|=7.44e-04
+  v21_lam005_s42_unclip      top1%mass=0.573  top5%mass=0.918  changed>1e-4=0.101  >1e-3=0.024  p99|Δθ|=1.57e-03
+  v21_lam100_s42_unclip      top1%mass=0.588  top5%mass=0.934  changed>1e-4=0.097  >1e-3=0.018  p99|Δθ|=2.03e-03

@@ -1,0 +1,57 @@
+# exp8_fixed_hint_opd.yaml — Experiment 8 stage 2: pure OPD from a FIXED task-level-hint teacher.
+#
+# per-task-hint-search-gepa.md, sharpened by §7.10 + §7.12: Exp 5 showed *per-problem answer*
+# conditioning rescues pure OPD from the dead corner (λ=1 clip=1.0: 0.029 → 0.188 s42 / 0.252 4-seed)
+# but spends the §8.4 unbiasedness leg (privileged info). This config distills from the same 7B-SFT
+# teacher conditioned on a FIXED task-level hint found by the GEPA-style search (harness.hint_search,
+# stage 1) — an entry-INDEPENDENT string, no per-problem leak.
+#
+# Read (all at λ=1, clip=1.0, seed 42, vs the same-protocol references):
+#   * hint-OPD ≈ 0.03-0.05 (≈ plain clipped OPD)  -> the §7.10 rescue is about per-problem PRIVILEGE;
+#     a task-level distribution shift doesn't reach answer-shaped paths. Hint search dead end at λ=1.
+#   * hint-OPD ≈ 0.15-0.25 (≈ OPSD)               -> the rescue is about shifting the teacher onto
+#     answer-shaped trajectories GENERALLY — and this version is unbiased (no privileged info), i.e.
+#     a real step toward the §8.4 frontier object (dense + on-policy + un-privileged).
+#
+# Everything below matches the §7.10 OPSD protocol (opsd.yaml / exp5) except condition_on/fixed_hint.
+# The launcher overrides teacher.fixed_hint with the stage-1 winner (and optionally a Pareto/ablation
+# hint per arm): --set teacher.fixed_hint="<searched hint>".
+model_name: allenai/OLMo-2-0425-1B-SFT      # student: same cold 1B-SFT as Exp 1/4/5
+data:
+  specs:
+    - name: gsm_symbolic
+  size: 3000
+loss: reinforce
+max_new_tokens: 1024
+
+# --- meta-algorithm corner: (alpha=1, lam=1, teacher=self+fixed_hint) = hint-conditioned pure OPD ---
+alpha: 1.0
+lam: 1.0                                    # pure distillation (the corner OPSD rescued); launcher may sweep
+teacher:
+  kind: self
+  model_name: allenai/OLMo-2-1124-7B-SFT    # same teacher as Exp 5 (§7.10) — refs are apples-to-apples
+  condition_on: fixed_hint
+  fixed_hint: "PLACEHOLDER — overridden by the launcher with the stage-1 searched hint"
+  device_id: 0
+  frozen_at_init: true
+per_token_kl_clip: 1.0                      # the §7.7/§8.2 structural stabilizer (matched to §7.10 refs)
+outcome_loss: grpo                          # unused at lam=1
+
+# --- training (matched to exp5_opsd_lambda.yaml / §7.10) ---
+lr: 1.0e-5
+prompts_per_step: 8
+num_rollouts: 8
+rollout_batch_size: 8
+train_batch_size: 4
+batch_acc: 2
+num_steps: 500
+seed: 42
+
+# --- eval done post-hoc in the launcher at the matched protocol (T=0.6, 64x16, eval-seed 1e6) ---
+eval_every: 0
+save_ckpt: true
+
+# --- logging (W&B) ---
+wandb_project: distill-harness
+wandb_group: exp8-fixed-hint-opd
+wandb_tags: [exp8, hint-search, gepa, gsm_symbolic, "olmo2-1b-sft<-7b-sft+fixed_hint"]

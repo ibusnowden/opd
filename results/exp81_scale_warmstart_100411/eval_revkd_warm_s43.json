@@ -1,0 +1,33 @@
+{
+  "ckpt": "/project/inniang/research/harness/checkpoints/revkd-warm-instruct7b-s43",
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.287109375,
+      "eval/pass@2": 0.3912760416666667,
+      "eval/pass@4": 0.4959220467032967,
+      "eval/pass@8": 0.5938689782439782,
+      "eval/pass@16": 0.671875,
+      "eval/accuracy_mean": 0.287109375,
+      "eval/solved_any": 0.671875,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 237.70836520195007,
+      "eval/token_entropy": 0.5077225210843608,
+      "eval/distinct_1": 0.06411516163898988,
+      "eval/distinct_2": 0.23155533399800599,
+      "eval/distinct_3": 0.35313164019022564,
+      "eval/distinct_4": 0.4346240755957272
+    }
+  }
+}

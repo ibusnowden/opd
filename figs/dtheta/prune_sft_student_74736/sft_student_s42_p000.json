@@ -1,0 +1,45 @@
+{
+  "base": "allenai/OLMo-2-0425-1B-SFT",
+  "ckpt": "harness/checkpoints/sft-student-rft-gsm-s42",
+  "prune_pct_target": 0.0,
+  "prune_stats": {
+    "tau": -1.0,
+    "n_moved": 80111204,
+    "n_total": 1484916736,
+    "n_zero": 1404805532,
+    "prune_pct_target": 0.0,
+    "actual_prune_frac_of_moved": 0.0,
+    "actual_prune_frac_of_total": 0.0,
+    "n_pruned": 0
+  },
+  "task": "gsm_symbolic",
+  "n_prompts": 64,
+  "n_samples": 16,
+  "k_values": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "metrics_by_temp": {
+    "T=0.6": {
+      "eval/pass@1": 0.376953125,
+      "eval/pass@2": 0.4641927083333333,
+      "eval/pass@4": 0.5445398351648352,
+      "eval/pass@8": 0.6213918026418026,
+      "eval/pass@16": 0.703125,
+      "eval/accuracy_mean": 0.376953125,
+      "eval/solved_any": 0.703125,
+      "eval/n_prompts": 64.0,
+      "eval/n_samples": 16.0,
+      "eval/temperature": 0.6,
+      "eval/gen_seconds": 267.5850119590759,
+      "eval/token_entropy": 0.4146837377920747,
+      "eval/distinct_1": 0.05304115529056487,
+      "eval/distinct_2": 0.1938057618991471,
+      "eval/distinct_3": 0.3010336432932913,
+      "eval/distinct_4": 0.37667707024441655
+    }
+  }
+}
